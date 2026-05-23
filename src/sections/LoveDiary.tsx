@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { SectionShell } from "@/components/SectionShell";
@@ -30,15 +30,6 @@ export function LoveDiary() {
     { id: 8, image: nk3, quote: "Chỉ cần là em, muộn một chút cũng không sao." },
   ]);
 
-  const [isMobile, setIsMobile] = useState(true);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
   const handlePolaroidClick = () => {
     setPolaroidStack((prev) => {
       const nextStack = [...prev];
@@ -53,8 +44,7 @@ export function LoveDiary() {
       <div className="stack-explainer">Click vào bức ảnh trên cùng để lật sang trang mới!</div>
       <div className="polaroid-deck-container" onClick={handlePolaroidClick}>
         <div className="polaroid-deck">
-          {/* On mobile only render top 3 cards to reduce Framer Motion work */}
-          {polaroidStack.slice(0, isMobile ? 3 : polaroidStack.length).map((card, index) => {
+          {polaroidStack.map((card, index) => {
             const rotation = index === 0 ? -2 : index === 1 ? 3 : index === 2 ? -4 : 1;
             const offset = index * 5; // vertical deck depth
 
@@ -74,8 +64,8 @@ export function LoveDiary() {
                 }}
                 transition={{
                   type: "spring",
-                  stiffness: isMobile ? 180 : 240,
-                  damping: isMobile ? 30 : 24,
+                  stiffness: 240,
+                  damping: 24,
                 }}
               >
                 {/* Washi tape at top of top card */}

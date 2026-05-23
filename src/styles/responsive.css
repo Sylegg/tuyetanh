@@ -62,6 +62,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -73,7 +74,7 @@
 }
 
 @media (max-width: 768px) {
-  /* ── 1. Disable backdrop-filter (GPU compositing overhead) ── */
+  /* High-Performance Mobile Optimizations: Disable heavy real-time WebKit backdrop blurring */
   .portrait-card,
   .family-card,
   .event-card,
@@ -85,12 +86,14 @@
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     background: rgba(255, 255, 255, 0.94) !important;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
   }
 
   .editorial-caption {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    background: rgba(18, 9, 11, 0.82) !important;
+    background: rgba(18, 9, 11, 0.74) !important;
   }
 
   .parallax-time-box {
@@ -110,79 +113,12 @@
     -webkit-backdrop-filter: none !important;
   }
 
-  /* music-orb backdrop-filter also heavy */
-  .music-orb {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    background: rgba(255, 250, 241, 0.92) !important;
-  }
-
-  /* ── 2. Disable expensive filter:blur() on decorative elements ── */
-  .editorial-couple-layout::before,
-  .editorial-couple-layout::after,
-  .soft-light {
-    filter: none !important;
-    display: none; /* purely decorative, hide on mobile */
-  }
-
-  /* hero glow is expensive with blur */
-  .hero-face-glow {
-    filter: none !important;
-    background: rgba(255, 238, 191, 0.18) !important;
-  }
-
-  /* ── 3. Stop continuous looping CSS animations on mobile ── */
-  .soft-light,
-  .hero-face-glow {
-    animation: none !important;
-  }
-
-  .editorial-petal,
-  .editorial-spark {
-    animation: none !important;
-    opacity: 0.3;
-  }
-
-  .wish-bubble {
-    animation: none !important;
-  }
-
-  .hero-open-button::before {
-    animation: none !important; /* shimmer */
-  }
-
-  .hero-open-button::after {
-    animation: none !important; /* glow */
-    filter: none !important;
-  }
-
-  .polaroid-deck-click-hint {
-    animation: none !important;
-  }
-
-  /* ── 4. Disable body::before fixed texture (causes repaint on scroll) ── */
-  body::before {
-    display: none !important;
-  }
-
-  /* ── 5. Lightweight will-change only on actively animated elements ── */
+  /* Force hardware acceleration on animate elements */
   [data-reveal],
-  .editorial-person-card {
+  .editorial-person-card,
+  .hero-open-button {
     will-change: transform;
     transform: translate3d(0, 0, 0);
-  }
-
-  /* Remove will-change from static elements to reduce memory */
-  .particle-snow,
-  .particle-petal {
-    will-change: transform; /* OK – these are actively animating */
-  }
-
-  /* ── 6. Simplify CTAs arrows animation ── */
-  .cta-arrows-left,
-  .cta-arrows-right {
-    animation: none !important;
-    opacity: 0.82;
   }
 }
 

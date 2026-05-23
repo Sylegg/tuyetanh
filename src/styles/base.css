@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --ivory: #fffaf1;
   --ivory-soft: #fff6e7;
   --ivory-warm: #f7ead3;
@@ -28,12 +28,6 @@ body {
   color: var(--ink);
   font-family: "Cormorant Garamond", serif;
   overflow-x: hidden;
-  /* iOS momentum scrolling */
-  -webkit-overflow-scrolling: touch;
-  /* Prevent 300ms tap delay on mobile */
-  touch-action: pan-y;
-  /* Prevent scroll chaining */
-  overscroll-behavior-y: contain;
 }
 
 body::before {
