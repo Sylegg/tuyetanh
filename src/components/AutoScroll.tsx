@@ -46,15 +46,21 @@ export function AutoScroll() {
     };
   }, [active, startScroll]);
 
-  // Stop on manual scroll (wheel / touch)
+  // Stop on manual scroll (wheel / touch outside the button)
   useEffect(() => {
     if (!active) return;
-    const onManual = () => stopScroll();
-    window.addEventListener("wheel", onManual, { passive: true });
-    window.addEventListener("touchmove", onManual, { passive: true });
+    const onWheel = () => stopScroll();
+    const onTouchStart = (e: TouchEvent) => {
+      // Don't stop if the user tapped the button itself
+      const btn = document.querySelector(".autoscroll-btn");
+      if (btn && e.target instanceof Node && btn.contains(e.target)) return;
+      stopScroll();
+    };
+    window.addEventListener("wheel", onWheel, { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
     return () => {
-      window.removeEventListener("wheel", onManual);
-      window.removeEventListener("touchmove", onManual);
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
     };
   }, [active, stopScroll]);
 
@@ -63,8 +69,10 @@ export function AutoScroll() {
       className={`autoscroll-btn ${active ? "autoscroll-active" : ""}`}
       onClick={toggle}
       role="button"
+      tabIndex={0}
       aria-label={active ? "Dừng tự cuộn" : "Tự động cuộn trang"}
       title={active ? "Dừng tự cuộn" : "Tự động cuộn"}
+      style={{ touchAction: "manipulation" }}
     >
       {/* arrows */}
       <div className="autoscroll-arrows">

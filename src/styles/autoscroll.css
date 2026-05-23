@@ -153,6 +153,11 @@
     left: 1.25rem;
     width: 48px;
     height: 48px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    /* Ensure nothing overlaps the button */
+    z-index: 99999;
   }
 
   .autoscroll-arrows svg {
