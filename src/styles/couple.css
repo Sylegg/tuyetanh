@@ -1,4 +1,4 @@
-﻿.portrait-grid,
+.portrait-grid,
 .family-grid {
   display: grid;
   gap: 1.2rem;
@@ -91,6 +91,8 @@
   pointer-events: none;
   user-select: none;
   will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .editorial-person-card.is-bride {
