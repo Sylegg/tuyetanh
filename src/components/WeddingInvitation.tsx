@@ -112,8 +112,17 @@ export default function WeddingInvitation() {
           <motion.div
             className="invitation-card-base"
             initial={{ scale: 0.82, y: 34, opacity: 0, rotateX: 4 }}
-            animate={{ scale: 1, y: 0, opacity: 1, rotateX: 0 }}
-            transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
+            animate={{
+              scale: [0.82, 1, 1, 1.25],
+              y: [34, 0, 0, 0],
+              opacity: [0, 1, 1, 0],
+              rotateX: [4, 0, 0, 0]
+            }}
+            transition={{
+              duration: 8.2,
+              times: [0, 0.07, 0.94, 1],
+              ease: [0.22, 1, 0.36, 1]
+            }}
           >
             <motion.div
               className="invitation-light-spill"

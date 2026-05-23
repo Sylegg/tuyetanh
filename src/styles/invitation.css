@@ -1,4 +1,4 @@
-﻿.invitation-opening {
+.invitation-opening {
   position: fixed;
   inset: 0;
   z-index: 999;
@@ -14,6 +14,7 @@
     rgba(18, 10, 12, 0.48);
   backdrop-filter: blur(12px);
   perspective: 1800px;
+  -webkit-perspective: 1800px;
   overscroll-behavior: none;
   pointer-events: auto;
   touch-action: none;
@@ -26,7 +27,9 @@
   height: 100dvh;
   border-radius: 0;
   perspective: 1800px;
+  -webkit-perspective: 1800px;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   will-change: transform, opacity;
   box-shadow:
     0 44px 120px rgba(18, 10, 12, 0.5),
@@ -135,7 +138,9 @@
     linear-gradient(135deg, #fff8e8 0%, #f4dcab 45%, #fff2d4 100%),
     repeating-linear-gradient(90deg, rgba(216, 179, 106, 0.16) 0 1px, transparent 1px 12px);
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transform: translateZ(0);
   will-change: transform;
   display: grid;

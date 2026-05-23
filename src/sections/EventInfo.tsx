@@ -371,7 +371,7 @@ export function EventInfo() {
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
             {/* Backdrop */}
             <motion.div
-              className="absolute inset-0 z-10 bg-[#0e0608]/75 backdrop-blur-sm"
+              className="absolute inset-0 z-10 bg-black/70"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
