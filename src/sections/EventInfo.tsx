@@ -368,22 +368,20 @@ export function EventInfo() {
       {/* RSVP Modal */}
       <AnimatePresence>
         {isRsvpOpen && (
-          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
-            {/* Backdrop */}
-            <motion.div
-              className="absolute inset-0 z-10 bg-black/70"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsRsvpOpen(false)}
-            />
-
+          <motion.div
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/75"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsRsvpOpen(false)}
+            transition={{ duration: 0.3 }}
+          >
             {/* Modal Card */}
             <motion.div
               onClick={(e) => e.stopPropagation()}
-              className="relative z-50 w-full max-w-[420px] bg-white border border-[#d8b67c]/30 shadow-[0_20px_50px_rgba(97,18,38,0.22)] p-7 md:p-9 flex flex-col gap-6 text-left"
+              className="relative z-50 w-full max-w-[420px] bg-white border border-[#d8b67c]/30 shadow-[0_20px_50px_rgba(97,18,38,0.22)] p-7 md:p-9 flex flex-col gap-6 text-left pointer-events-auto select-auto"
               initial={{ opacity: 0, scale: 0.94, y: 15 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ opacity: 0, scale: 0.94, y: 15 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
@@ -517,7 +515,7 @@ export function EventInfo() {
                 </form>
               )}
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </section>
