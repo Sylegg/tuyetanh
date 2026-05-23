@@ -43,11 +43,11 @@ export function Particles() {
   );
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-20 overflow-hidden" aria-hidden="true">
+    <div className="pointer-events-none fixed inset-0 z-[9] overflow-hidden" aria-hidden="true">
       {particles.map((particle) => (
         <motion.span
           key={`snow-${particle.id}`}
-          className="absolute top-[-2rem] rounded-full bg-white/80 shadow-[0_0_16px_rgba(255,255,255,0.85)]"
+          className="pointer-events-none absolute top-[-2rem] rounded-full bg-white/80 shadow-[0_0_16px_rgba(255,255,255,0.85)]"
           style={{ left: particle.left, width: particle.size, height: particle.size }}
           animate={{ y: ["0vh", "110vh"], x: [0, particle.id % 2 ? 22 : -18], opacity: [0, 0.8, 0] }}
           transition={{
@@ -62,7 +62,7 @@ export function Particles() {
       {petals.map((petal) => (
         <motion.span
           key={`petal-${petal.id}`}
-          className="absolute top-[-3rem] h-4 w-2 rounded-full bg-[#b64055]/35"
+          className="pointer-events-none absolute top-[-3rem] h-4 w-2 rounded-full bg-[#b64055]/35"
           style={{ left: petal.left }}
           animate={{
             y: ["0vh", "110vh"],
