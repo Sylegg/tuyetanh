@@ -129,12 +129,12 @@ export function EventInfo() {
 
   // Fixed positions — avoid Math.random() in render to prevent SSR hydration mismatch
   const particles = [
-    { left: "12%",  top: "18%" },
-    { left: "78%",  top: "8%"  },
-    { left: "55%",  top: "72%" },
-    { left: "30%",  top: "55%" },
-    { left: "88%",  top: "42%" },
-    { left: "5%",   top: "85%" },
+    { left: "12%", top: "18%" },
+    { left: "78%", top: "8%" },
+    { left: "55%", top: "72%" },
+    { left: "30%", top: "55%" },
+    { left: "88%", top: "42%" },
+    { left: "5%", top: "85%" },
   ];
 
   return (
@@ -323,15 +323,39 @@ export function EventInfo() {
             {/* Primary RSVP Button */}
             <motion.button
               onClick={() => setIsRsvpOpen(true)}
-              className="relative z-10 w-full max-w-[280px] mx-auto py-3.5 mt-4 bg-[#7b1f2f] text-xs uppercase tracking-[0.2em] font-[Cormorant_Garamond] font-bold text-white rounded-full transition-all duration-300 shadow-[0_8px_30px_rgba(123,31,47,0.18)] hover:bg-[#fffaf1] hover:text-[#7b1f2f] hover:border-[#7b1f2f] border-2 border-[#7b1f2f] overflow-hidden group flex items-center justify-center gap-1.5"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
+              className="relative z-10 w-full max-w-[280px] mx-auto py-3.5 mt-4 bg-[#962d3e] text-xs uppercase tracking-[0.2em] font-[Cormorant_Garamond] font-bold text-white rounded-full transition-all duration-300 hover:bg-[#fffaf1] hover:text-[#962d3e] hover:border-[#962d3e] border-2 border-[#962d3e] overflow-hidden group flex items-center justify-center gap-1.5"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              animate={{
+                boxShadow: [
+                  "0 8px 30px rgba(150, 45, 62, 0.15)",
+                  "0 8px 30px rgba(150, 45, 62, 0.35)",
+                  "0 8px 30px rgba(150, 45, 62, 0.15)",
+                ]
+              }}
+              transition={{
+                boxShadow: {
+                  duration: 2.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }
+              }}
             >
               {/* Gold dashed inner border matching user's request styled elegantly */}
               <span className="absolute inset-1.5 border-2 border-dashed border-[#d8b67c] rounded-full pointer-events-none" />
-              
-              {/* Shimmer light */}
-              <span className="absolute inset-y-0 -left-[100%] w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 group-hover:animate-shimmer" />
+
+              {/* Gliding elegant light shimmer */}
+              <motion.span
+                className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 pointer-events-none"
+                initial={{ left: "-100%" }}
+                animate={{ left: "200%" }}
+                transition={{
+                  duration: 2.2,
+                  repeat: Infinity,
+                  repeatDelay: 2.5,
+                  ease: "easeInOut",
+                }}
+              />
 
               <span className="relative z-10 flex items-center gap-1.5 font-bold">
                 Xác nhận dự tiệc
@@ -479,14 +503,16 @@ export function EventInfo() {
                   </div>
 
                   {/* Submit Button */}
-                  <button
+                  <motion.button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3 mt-2 bg-[#7b1f2f] hover:bg-[#fffaf1] hover:text-[#7b1f2f] border border-[#7b1f2f] text-xs uppercase tracking-[0.2em] font-[Cormorant_Garamond] font-bold text-white transition-all duration-300 relative overflow-hidden flex items-center justify-center gap-1.5"
+                    className="w-full py-3 mt-2 bg-[#962d3e] hover:bg-[#fffaf1] hover:text-[#962d3e] border border-[#962d3e] text-xs uppercase tracking-[0.2em] font-[Cormorant_Garamond] font-bold text-white transition-all duration-300 relative overflow-hidden flex items-center justify-center gap-1.5"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     <span className="absolute inset-0.5 border border-[#d8b67c]/40 pointer-events-none" />
                     {isSubmitting ? "Đang gửi..." : "Gửi Xác Nhận"}
-                  </button>
+                  </motion.button>
                 </form>
               )}
             </motion.div>
