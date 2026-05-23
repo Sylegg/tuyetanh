@@ -21,8 +21,7 @@
     linear-gradient(180deg, #fffaf0 0%, #fff3df 48%, #fffaf0 100%);
 }
 
-#couple::before,
-#couple::after {
+#couple::before {
   content: "";
   position: absolute;
   pointer-events: none;
@@ -35,17 +34,6 @@
     repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0 2px, transparent 2px 18px),
     radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.72), transparent 21rem);
   opacity: 0.68;
-}
-
-#couple::after {
-  right: -2rem;
-  top: 6rem;
-  width: 11rem;
-  height: 16rem;
-  border: 1px solid rgba(216, 179, 106, 0.26);
-  border-radius: 999px;
-  transform: rotate(-18deg);
-  opacity: 0.42;
 }
 
 .editorial-couple-layout::before,
@@ -79,7 +67,6 @@
   max-width: calc(100vw - 4.5rem);
   min-height: clamp(25.5rem, 108vw, 35.5rem);
   overflow: hidden;
-  border: 1px solid #d8b36a66;
   border-radius: 36px;
   background: #fffaf1;
   box-shadow:
@@ -91,6 +78,16 @@
   pointer-events: none;
   user-select: none;
   will-change: transform;
+}
+
+.editorial-person-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border: 1px solid #d8b36a66;
+  border-radius: 36px;
+  pointer-events: none;
 }
 
 .editorial-person-card.is-bride {
@@ -117,6 +114,11 @@
   object-position: center 18%;
   transform: scale(1.035);
   transition: none;
+}
+
+.editorial-person-card.is-groom .editorial-image img {
+  object-position: 40% 18%;
+  /* Shifted the groom's photo to the right */
 }
 
 .editorial-vignette {
