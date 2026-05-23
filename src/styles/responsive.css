@@ -62,7 +62,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {
@@ -74,7 +73,7 @@
 }
 
 @media (max-width: 768px) {
-  /* High-Performance Mobile Optimizations: Disable heavy real-time WebKit backdrop blurring */
+  /* ── Disable ALL backdrop-filter (heaviest GPU op on mobile) ── */
   .portrait-card,
   .family-card,
   .event-card,
@@ -86,20 +85,29 @@
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     background: rgba(255, 255, 255, 0.94) !important;
-    will-change: transform;
-    transform: translate3d(0, 0, 0);
   }
 
   .editorial-caption {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    background: rgba(18, 9, 11, 0.74) !important;
+    background: rgba(18, 9, 11, 0.82) !important;
   }
 
   .parallax-time-box {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     background: rgba(20, 16, 16, 0.88) !important;
+  }
+
+  .clock-item {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .autoscroll-btn {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 
   .music-player-btn,
@@ -113,12 +121,55 @@
     -webkit-backdrop-filter: none !important;
   }
 
-  /* Force hardware acceleration on animate elements */
+  /* ── GPU-composite all animated elements to prevent jank on section entry ── */
   [data-reveal],
   .editorial-person-card,
-  .hero-open-button {
-    will-change: transform;
+  .album-card,
+  .polaroid-deck-card,
+  .polaroid-container,
+  .love-letter-paper,
+  .love-letter-paper-back,
+  .love-letter-paper-front,
+  .hero-open-button,
+  .parallax-bg-wrapper {
+    will-change: transform, opacity;
     transform: translate3d(0, 0, 0);
   }
-}
 
+  /* ── Contain repaint to each section so animations don't cascade ── */
+  .section-shell,
+  .love-letter-section,
+  #event,
+  #couple,
+  #countdown,
+  #story,
+  #love-diary {
+    contain: layout style;
+  }
+
+  /* ── Simplify box-shadows (expensive multi-layer shadows on mobile) ── */
+  .editorial-person-card {
+    box-shadow: 0 12px 32px rgba(32, 24, 26, 0.18) !important;
+  }
+
+  .album-card,
+  .polaroid-deck-card {
+    box-shadow: 0 6px 20px rgba(97, 18, 38, 0.08) !important;
+  }
+
+  /* ── Disable hover effects on touch (no hover on mobile) ── */
+  .album-card:hover,
+  .album-card:hover .album-card-image,
+  .portrait-card:hover img,
+  .gallery-item:hover img,
+  .gallery-slide:hover img,
+  .parallax-time-box:hover {
+    transform: none !important;
+  }
+
+  /* ── Hide decorative petals/sparks on mobile to save GPU ── */
+  .editorial-petal,
+  .editorial-spark {
+    display: none;
+  }
+}

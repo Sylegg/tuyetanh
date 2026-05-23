@@ -27,6 +27,7 @@
   filter: url(#torn-paper-filter);
   transform-origin: center;
   transition: transform 0.4s ease;
+  will-change: transform, opacity;
 }
 
 .album-card:hover {
