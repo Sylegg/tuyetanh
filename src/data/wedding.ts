@@ -43,7 +43,7 @@ export const people = [
   {
     role: "Cô dâu",
     name: "Tuyết Anh",
-    birthday: "16.03.204",
+    birthday: "16.03.2004",
     quote: "Dịu dàng như ánh nến, rạng rỡ như một lời hẹn trăm năm.",
     image: bridePortrait,
   },
