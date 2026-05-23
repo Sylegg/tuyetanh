@@ -73,6 +73,25 @@
 }
 
 @media (max-width: 768px) {
+  /* ── Disable fixed body::before overlay and heavy SVG/CSS filters on mobile ── */
+  body::before {
+    display: none !important;
+  }
+
+  .deckled-paper,
+  .album-card,
+  .polaroid-deck-card {
+    filter: drop-shadow(0 6px 16px rgba(97, 18, 38, 0.07)) !important;
+  }
+
+  .album-card-tape,
+  .polaroid-deck-tape,
+  .polaroid-tape {
+    filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
   /* ── Disable ALL backdrop-filter (heaviest GPU op on mobile) ── */
   .portrait-card,
   .family-card,

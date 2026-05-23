@@ -197,22 +197,11 @@ export function ParallaxCountdown() {
             transition={{ duration: 0.7, delay: 0.5 }}
           >
             <div className="flex flex-col items-center gap-1.5">
-              <span className="tracking-[0.25em]">02.07.2026 •</span>
+              <span className="tracking-[0.25em]">02/05.07.2026 •</span>
               <span className="font-bold text-[#fff5dc] tracking-[0.28em]">Tuyết Anh & Minh Hiếu</span>
             </div>
           </motion.div>
         </div>
-
-        {/* Absolute semantic page footer copyright stamp */}
-        <motion.p
-          className="text-[9px] uppercase tracking-[0.2em] text-[#705e5c]/60 font-bold font-[Cormorant_Garamond] mt-8 select-none"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.6 }}
-        >
-          © 2026 Tuyết Anh & Minh Hiếu • Made with Love
-        </motion.p>
       </div>
     </footer>
   );

@@ -44,7 +44,7 @@ export function LoveDiary() {
       <div className="stack-explainer">Click vào bức ảnh trên cùng để lật sang trang mới!</div>
       <div className="polaroid-deck-container" onClick={handlePolaroidClick}>
         <div className="polaroid-deck">
-          {polaroidStack.map((card, index) => {
+          {polaroidStack.slice(0, 3).map((card, index) => {
             const rotation = index === 0 ? -2 : index === 1 ? 3 : index === 2 ? -4 : 1;
             const offset = index * 5; // vertical deck depth
 

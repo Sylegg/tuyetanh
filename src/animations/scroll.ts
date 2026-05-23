@@ -6,6 +6,17 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 let registered = false;
 
 export function initScrollAnimations() {
+  // Bypass GSAP ScrollTriggers entirely on mobile/tablet to eliminate scroll jank
+  if (typeof window !== "undefined" && window.innerWidth < 768) {
+    document.querySelectorAll("[data-reveal]").forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      htmlEl.style.opacity = "1";
+      htmlEl.style.visibility = "visible";
+      htmlEl.style.transform = "none";
+    });
+    return;
+  }
+
   if (registered) return;
   gsap.registerPlugin(ScrollTrigger);
   registered = true;

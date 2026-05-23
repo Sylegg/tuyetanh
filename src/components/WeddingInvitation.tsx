@@ -128,7 +128,7 @@ export default function WeddingInvitation() {
                 <em>&</em>
                 <span>{wedding.groom}</span>
               </strong>
-              <small>02.07.2026</small>
+              <small>02/05.07.2026</small>
             </div>
             <motion.div
               className="invitation-door invitation-door-left"
