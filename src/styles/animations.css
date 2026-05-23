@@ -1,0 +1,96 @@
+﻿@keyframes glowDrift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(1rem, -1rem, 0) scale(1.14);
+  }
+}
+
+@keyframes heroGlowBreath {
+
+  0%,
+  100% {
+    opacity: 0.68;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}
+
+@keyframes musicSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ctaShimmer {
+
+  0%,
+  44% {
+    transform: translateX(-120%);
+  }
+
+  70%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes ctaGlow {
+
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes ctaLeftNudge {
+
+  0%,
+  100% {
+    transform: translateX(-0.1rem);
+    opacity: 0.72;
+  }
+
+  50% {
+    transform: translateX(0.18rem);
+    opacity: 1;
+  }
+}
+
+@keyframes ctaRightNudge {
+
+  0%,
+  100% {
+    transform: translateX(0.1rem);
+    opacity: 0.72;
+  }
+
+  50% {
+    transform: translateX(-0.18rem);
+    opacity: 1;
+  }
+}
+
+@keyframes bubbleFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}

@@ -1,0 +1,455 @@
+.album-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5.5rem;
+  width: min(100%, 500px);
+  margin: 0 auto;
+  position: relative;
+  padding: 1.5rem 0.5rem;
+}
+
+.album-card {
+  position: relative;
+  width: 100%;
+  padding: 16px 16px 36px;
+  background: 
+    linear-gradient(135deg, #fffefe, #fffdf8),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+  border: 1px solid rgba(224, 209, 186, 0.45);
+  border-radius: 4px;
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 15px 45px rgba(97, 18, 38, 0.08);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  filter: url(#torn-paper-filter);
+  transform-origin: center;
+  transition: transform 0.4s ease;
+}
+
+.album-card:hover {
+  transform: scale(1.02) rotate(0deg) !important;
+}
+
+/* Semi-transparent tape at the top of each card */
+.album-card-tape {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 80px;
+  height: 20px;
+  background: rgba(246, 243, 235, 0.46);
+  backdrop-filter: blur(1.5px);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  z-index: 10;
+  filter: url(#tape-torn-filter);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  pointer-events: none;
+}
+
+.album-card-photo-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #f7f7f7;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.album-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.album-card:hover .album-card-image {
+  transform: scale(1.035);
+}
+
+.album-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1.8rem;
+  text-align: center;
+}
+
+.album-card-num {
+  font-family: "Playfair Display", serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: rgba(117, 25, 43, 0.12);
+  line-height: 1;
+  margin-bottom: 0.1rem;
+  user-select: none;
+}
+
+.album-card-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38%;
+  margin: 0.4rem auto 1rem;
+}
+
+.divider-dot {
+  flex: 1;
+  height: 0.8px;
+  background: linear-gradient(90deg, transparent, #d8b36a 30%, #d8b36a 70%, transparent);
+  opacity: 0.8;
+}
+
+.divider-heart {
+  color: #d8b36a;
+  padding: 0 0.5rem;
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.album-card-poem {
+  margin: 0.4rem 0 1rem;
+}
+
+.album-card-poem-line {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.08rem, 3.8vw, 1.22rem);
+  font-style: italic;
+  font-weight: 500;
+  color: #4a2b2f;
+  line-height: 2.05;
+  margin: 0;
+  padding: 0.06rem 0;
+}
+
+.album-card-note {
+  font-family: "Great Vibes", cursive;
+  font-size: 1.7rem;
+  color: #b9893c;
+  margin-top: 0.6rem;
+  opacity: 0.88;
+}
+
+@media (max-width: 580px) {
+  .album-stack {
+    gap: 3.8rem;
+    padding: 1rem 0.2rem;
+  }
+  
+  .album-card {
+    padding: 10px 10px 26px;
+    width: 96%;
+  }
+
+  .album-card-tape {
+    width: 65px;
+    height: 18px;
+    top: -12px;
+  }
+  
+  .album-card-photo-wrapper {
+    aspect-ratio: 3 / 4;
+  }
+  
+  .album-card-content {
+    padding-top: 1.2rem;
+  }
+  
+  .album-card-num {
+    font-size: 1.8rem;
+  }
+  
+  .album-card-poem-line {
+    line-height: 1.95;
+  }
+  
+  .album-card-note {
+    font-size: 1.5rem;
+    margin-top: 0.4rem;
+  }
+}
+
+.story-paper p,
+.event-card p,
+.family-card span {
+  color: var(--soft);
+  font-size: 1.08rem;
+}
+
+.family-card {
+  border-radius: 28px;
+  padding: 1.6rem;
+  text-align: center;
+}
+
+.event-card {
+  overflow: hidden;
+  border-radius: 32px;
+  padding: 1.1rem;
+  text-align: center;
+}
+
+.event-date {
+  color: var(--burgundy) !important;
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(3rem, 15vw, 6rem) !important;
+  line-height: 1;
+}
+
+.decorative-divider {
+  width: 8rem;
+  height: 1px;
+  margin: 1rem auto;
+  background: linear-gradient(90deg, transparent, var(--champagne), transparent);
+}
+
+.event-actions {
+  display: grid;
+  gap: 0.8rem;
+  margin: 1.4rem 0;
+}
+
+.event-card iframe {
+  width: 100%;
+  height: 20rem;
+  border: 0;
+  border-radius: 24px;
+  filter: saturate(0.78) contrast(0.95);
+}
+
+.timeline-list {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+}
+
+.timeline-list::before {
+  content: "";
+  position: absolute;
+  left: 1.5rem;
+  top: 1rem;
+  bottom: 1rem;
+  width: 1px;
+  background: linear-gradient(var(--champagne), rgba(117, 25, 43, 0.18));
+}
+
+.timeline-card {
+  position: relative;
+  min-height: 6.2rem;
+  display: grid;
+  grid-template-columns: 3.25rem 4rem 1fr;
+  align-items: center;
+  gap: 0.8rem;
+  border-radius: 26px;
+  padding: 1rem;
+}
+
+.timeline-icon {
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #74172b;
+  color: #f9e5bd;
+  box-shadow: 0 14px 30px rgba(117, 25, 43, 0.24);
+}
+
+.timeline-card span {
+  color: var(--burgundy);
+  font-family: "Playfair Display", serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.gallery-mobile {
+  width: min(100%, 980px);
+  margin: 0 auto;
+}
+
+.gallery-slide {
+  position: relative;
+  height: 28rem;
+  overflow: hidden;
+  border: 0;
+  border-radius: 32px;
+  padding: 0;
+  background: transparent;
+}
+
+.gallery-masonry {
+  display: none;
+  width: min(100%, 1080px);
+  margin: 0 auto;
+  columns: 3 14rem;
+  column-gap: 1rem;
+}
+
+.gallery-item {
+  position: relative;
+  width: 100%;
+  height: 18rem;
+  margin: 0 0 1rem;
+  overflow: hidden;
+  border: 0;
+  border-radius: 28px;
+  padding: 0;
+  background: transparent;
+}
+
+.gallery-item-2 {
+  height: 24rem;
+}
+
+.gallery-item-3 {
+  height: 14rem;
+}
+
+.rsvp-form,
+.gift-card {
+  display: grid;
+  gap: 1rem;
+  border-radius: 32px;
+  padding: 1.1rem;
+}
+
+.rsvp-form label {
+  display: grid;
+  gap: 0.4rem;
+  color: #4a2b2f;
+  font-family: "Playfair Display", serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.rsvp-form input,
+.rsvp-form select,
+.rsvp-form textarea {
+  width: 100%;
+  border: 1px solid rgba(117, 25, 43, 0.18);
+  border-radius: 18px;
+  background: rgba(255, 250, 241, 0.7);
+  padding: 0.9rem 1rem;
+  color: var(--ink);
+  outline: none;
+}
+
+.gift-card {
+  justify-items: center;
+  text-align: center;
+}
+
+.gift-icon {
+  width: 4.4rem;
+  height: 4.4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #f9e7b6, #b9893c);
+  color: #44111f;
+}
+
+.gift-qr {
+  position: relative;
+  width: min(76vw, 18rem);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.gift-card strong {
+  font-family: "Playfair Display", serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.12em;
+}
+
+.wishes-field {
+  min-height: 28rem;
+  display: grid;
+  align-content: center;
+  gap: 0.9rem;
+  overflow: hidden;
+  border-radius: 32px;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(117, 25, 43, 0.08), rgba(216, 179, 106, 0.08));
+}
+
+.wish-bubble {
+  width: min(100%, 28rem);
+  border-radius: 24px;
+  padding: 1rem;
+  animation: bubbleFloat 4.5s ease-in-out infinite;
+}
+
+.wish-bubble:nth-child(even) {
+  justify-self: end;
+}
+
+.wish-bubble svg {
+  color: var(--burgundy);
+}
+
+.wish-bubble p {
+  margin: 0.35rem 0;
+  color: #4f3538;
+  font-size: 1rem;
+}
+
+.wish-bubble span {
+  color: var(--champagne);
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+}
+
+.final-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(180deg, rgba(20, 8, 11, 0.25), rgba(20, 8, 11, 0.78)),
+    radial-gradient(circle at center, transparent 0, rgba(0, 0, 0, 0.38) 68%);
+}
+
+.final-content {
+  width: min(90vw, 760px);
+  padding: 4rem 0;
+  color: var(--ivory);
+  text-align: center;
+}
+
+.final-content h2 {
+  margin: 1rem auto;
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(4rem, 16vw, 8rem);
+  line-height: 0.88;
+  text-shadow: 0 18px 40px rgba(0, 0, 0, 0.36);
+}
+
+.mini-countdown {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
+  margin: 1.5rem 0;
+}
+
+.mini-countdown span {
+  min-width: 4.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.7rem 0.9rem;
+  backdrop-filter: blur(14px);
+}
+
+.final-content blockquote {
+  max-width: 36rem;
+  margin: 0 auto;
+  color: rgba(255, 250, 241, 0.86);
+  font-size: 1.2rem;
+  font-style: italic;
+}

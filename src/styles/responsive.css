@@ -1,0 +1,74 @@
+﻿@media (min-width: 720px) {
+  .section-shell {
+    padding: 7rem 2rem;
+  }
+
+  .date-countdown-section {
+    padding: 5rem 2rem;
+  }
+
+  .date-section-inner {
+    gap: 1.25rem;
+  }
+
+  .portrait-grid,
+  .family-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .editorial-couple-layout {
+    min-height: 46rem;
+  }
+
+  .editorial-person-card {
+    width: min(46%, 28rem);
+    min-height: 35rem;
+  }
+
+  .editorial-person-card.is-bride {
+    margin-left: 8%;
+  }
+
+  .editorial-person-card.is-groom {
+    margin-top: -18rem;
+    margin-right: 7%;
+  }
+
+  .story-stack {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .event-actions {
+    grid-template-columns: repeat(2, minmax(0, 13rem));
+    justify-content: center;
+  }
+
+  .gallery-mobile {
+    display: none;
+  }
+
+  .gallery-masonry {
+    display: block;
+  }
+
+  .rsvp-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rsvp-form label:nth-child(4),
+  .rsvp-form button {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

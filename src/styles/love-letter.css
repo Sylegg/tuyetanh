@@ -1,0 +1,553 @@
+/* Tâm Thư (Love Letter) Stylesheet */
+
+.love-letter-section {
+  position: relative;
+  padding: 6rem 1.2rem;
+  background: linear-gradient(180deg, #fffaf0 0%, #fffaf1 100%);
+  overflow: hidden;
+}
+
+/* Background floating petals animation */
+.decorations-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.petal {
+  position: absolute;
+  background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+  border-radius: 12px 1px 12px 12px;
+  opacity: 0.65;
+  filter: blur(0.4px);
+  animation: floatPetal 18s linear infinite;
+  transform-origin: center;
+}
+
+.petal-1 {
+  width: 14px;
+  height: 18px;
+  left: 10%;
+  top: -20px;
+  animation-delay: 0s;
+  animation-duration: 16s;
+}
+
+.petal-2 {
+  width: 18px;
+  height: 22px;
+  left: 45%;
+  top: -25px;
+  animation-delay: 4s;
+  animation-duration: 22s;
+}
+
+.petal-3 {
+  width: 12px;
+  height: 15px;
+  right: 15%;
+  top: -20px;
+  animation-delay: 2s;
+  animation-duration: 14s;
+}
+
+.petal-4 {
+  width: 16px;
+  height: 20px;
+  left: 75%;
+  top: -20px;
+  animation-delay: 8s;
+  animation-duration: 19s;
+}
+
+.petal-5 {
+  width: 15px;
+  height: 19px;
+  left: 25%;
+  top: -20px;
+  animation-delay: 11s;
+  animation-duration: 21s;
+}
+
+@keyframes floatPetal {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.75;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(110vh) translateX(90px) rotate(480deg) scale(0.9);
+    opacity: 0;
+  }
+}
+
+/* Section Header overrides */
+.love-letter-header {
+  margin-bottom: 3.5rem;
+  z-index: 3;
+  position: relative;
+}
+
+.love-letter-eyebrow {
+  color: #75192b;
+  font-family: "Playfair Display", serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.38em;
+}
+
+.title-divider-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.vintage-divider {
+  opacity: 0.8;
+}
+
+/* Desk Layout & Stacked Papers */
+.love-letter-desk {
+  position: relative;
+  width: min(100%, 540px);
+  margin: 0 auto;
+  z-index: 2;
+  aspect-ratio: 1 / 1.38;
+}
+
+.deckled-paper {
+  filter: url(#torn-paper-filter) drop-shadow(0 15px 35px rgba(97, 18, 38, 0.07));
+}
+
+.love-letter-paper {
+  border-radius: 2px;
+}
+
+/* Back Paper (Slightly Rotated & Darker Shadow) */
+.love-letter-paper-back {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(135deg, #eedbc5, #e0cdb4),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  transform: rotate(-2.8deg) translate(-5px, 2px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Front Paper (Main Card) */
+.love-letter-paper-front {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(135deg, #fffefe, #fffdf8),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+  z-index: 2;
+  border: 1px solid rgba(224, 209, 186, 0.45);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Wax Seal top-left */
+.wax-seal-container {
+  position: absolute;
+  top: 1.8rem;
+  left: 1.8rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.babys-breath-stem {
+  position: absolute;
+  top: -42px;
+  left: -20px;
+  transform: rotate(-14deg);
+  pointer-events: none;
+}
+
+.wax-seal {
+  width: 46px;
+  height: 46px;
+  background: radial-gradient(circle at 35% 35%, #92263d 10%, #681223 85%);
+  border-radius: 47% 53% 49% 51% / 52% 48% 53% 47%; /* irregular organic seal edge */
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.25),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.35),
+    0 4px 10px rgba(97, 18, 35, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-8deg);
+  cursor: default;
+}
+
+.wax-seal-inner {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #7e1d32 10%, #540c1a 90%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.wax-rose {
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3));
+}
+
+/* Calligraphy Letter Title */
+.letter-title-container {
+  position: relative;
+  padding-top: 3.2rem;
+  margin-bottom: 0.8rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+}
+
+.letter-title-gui {
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(2.6rem, 8.5vw, 3.8rem);
+  color: #75192b;
+  line-height: 0.88;
+  margin: 0;
+  font-weight: 400;
+  transform: rotate(-2.5deg) translateX(-1.8rem);
+  text-shadow: 0.5px 0.5px 0.5px rgba(117, 25, 43, 0.1);
+}
+
+.letter-title-thuong {
+  font-family: "Alex Brush", cursive;
+  font-size: clamp(2.4rem, 8vw, 3.4rem);
+  color: #b9893c;
+  line-height: 0.88;
+  margin: 0;
+  font-weight: 400;
+  transform: translateY(-0.4rem) translateX(2rem);
+  text-shadow: 0.5px 0.5px 0.5px rgba(185, 137, 60, 0.15);
+}
+
+.letter-title-swash {
+  position: absolute;
+  bottom: -0.65rem;
+  right: 20%;
+  opacity: 0.85;
+}
+
+/* Envelope Sketch */
+.envelope-sketch-container {
+  display: flex;
+  justify-content: center;
+  margin: 1.2rem 0 0.8rem;
+  opacity: 0.72;
+}
+
+.envelope-sketch {
+  filter: drop-shadow(0.5px 0.5px 0.5px rgba(0, 0, 0, 0.05));
+}
+
+/* Gold Heart Divider */
+.letter-gold-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48%;
+  margin: 0.6rem auto 1.4rem;
+}
+
+.divider-line {
+  flex: 1;
+  height: 0.8px;
+  background: linear-gradient(90deg, transparent, #d8b36a 30%, #d8b36a 70%, transparent);
+  opacity: 0.8;
+}
+
+.divider-heart {
+  color: #d8b36a;
+  padding: 0 0.65rem;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* Poem Section */
+.poem-container {
+  position: relative;
+  width: 82%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.quote-mark {
+  position: absolute;
+  font-family: "Playfair Display", serif;
+  font-size: 4.8rem;
+  color: rgba(117, 25, 43, 0.07);
+  line-height: 1;
+  user-select: none;
+}
+
+.quote-left {
+  top: -1.8rem;
+  left: -1.6rem;
+}
+
+.quote-right {
+  bottom: -2.8rem;
+  right: -1.6rem;
+}
+
+.poem-text {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.02rem, 3.2vw, 1.2rem);
+  font-style: italic;
+  font-weight: 500;
+  color: #4a2b2f;
+  line-height: 2.15;
+  letter-spacing: 0.015em;
+}
+
+.poem-text p {
+  margin: 0;
+  padding: 0.06rem 0;
+}
+
+/* Bottom Swash Divider */
+.letter-bottom-swash {
+  display: flex;
+  justify-content: center;
+  margin: 1.4rem auto 0.4rem;
+  opacity: 0.72;
+}
+
+/* Paper Footer Area */
+.paper-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0.8rem 1.8rem 1.6rem;
+  position: relative;
+}
+
+/* Bottom-left: "forever us" calligraphy */
+.forever-us-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 0.5rem;
+  margin-bottom: 0.8rem;
+  transform: rotate(-4deg);
+  user-select: none;
+}
+
+.forever-text {
+  font-family: "Alex Brush", cursive;
+  font-size: clamp(1.8rem, 5.5vw, 2.5rem);
+  color: #b9893c;
+  line-height: 1;
+}
+
+.us-row {
+  display: flex;
+  align-items: center;
+  margin-top: -0.4rem;
+}
+
+.us-text {
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(2rem, 6.2vw, 2.8rem);
+  color: #b9893c;
+  line-height: 1;
+}
+
+.us-heart {
+  margin-left: 0.28rem;
+  transform: translateY(0.18rem);
+  opacity: 0.88;
+}
+
+/* Bottom-right: Polaroid Photo frame */
+.polaroid-container {
+  position: relative;
+  padding: 8px 8px 32px;
+  background: #ffffff;
+  border-radius: 1px;
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 12px 28px rgba(97, 18, 38, 0.1);
+  transform: rotate(3deg);
+  width: 140px;
+  max-width: 32vw;
+  box-sizing: border-box;
+  z-index: 5;
+  transition: transform 0.3s ease;
+}
+
+.polaroid-container:hover {
+  transform: rotate(1deg) scale(1.03);
+}
+
+/* Frosted Semi-transparent Tape */
+.polaroid-tape {
+  position: absolute;
+  top: -15px;
+  left: 35px;
+  width: 70px;
+  height: 20px;
+  background: rgba(246, 243, 235, 0.48);
+  backdrop-filter: blur(1.5px);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  transform: rotate(-10deg);
+  z-index: 10;
+  filter: url(#tape-torn-filter);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  pointer-events: none;
+}
+
+.polaroid-photo-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #f7f7f7;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.polaroid-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.15) contrast(0.96) saturate(0.92);
+}
+
+/* Extra decorations at bottom-right corner behind polaroid */
+.babys-breath-bottom {
+  position: absolute;
+  bottom: -15px;
+  right: -25px;
+  transform: rotate(-15deg);
+  pointer-events: none;
+  opacity: 0.6;
+  z-index: 3;
+}
+
+/* Responsive adjustment for Mobile screens */
+@media (max-width: 580px) {
+  .love-letter-section {
+    padding: 4.5rem 0.8rem;
+  }
+  
+  .love-letter-desk {
+    aspect-ratio: 1 / 1.5;
+  }
+  
+  .love-letter-paper-front {
+    padding-bottom: 0.5rem;
+  }
+  
+  .wax-seal-container {
+    top: 1.2rem;
+    left: 1.2rem;
+  }
+  
+  .wax-seal {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .wax-seal-inner {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .babys-breath-stem {
+    top: -30px;
+    left: -15px;
+    width: 38px;
+    height: 60px;
+  }
+  
+  .letter-title-container {
+    padding-top: 2.2rem;
+  }
+  
+  .letter-title-swash {
+    right: 15%;
+  }
+
+  .envelope-sketch-container {
+    margin: 0.6rem 0 0.3rem;
+  }
+
+  .envelope-sketch {
+    width: 75px;
+    height: 52px;
+  }
+  
+  .letter-gold-divider {
+    width: 60%;
+    margin: 0.3rem auto 0.8rem;
+  }
+  
+  .poem-container {
+    width: 86%;
+  }
+  
+  .poem-text {
+    line-height: 1.95;
+  }
+  
+  .quote-mark {
+    font-size: 3.5rem;
+  }
+  
+  .quote-left {
+    top: -1.2rem;
+    left: -1rem;
+  }
+  
+  .quote-right {
+    bottom: -2rem;
+    right: -1rem;
+  }
+  
+  .letter-bottom-swash {
+    margin: 0.8rem auto 0.2rem;
+    width: 120px;
+  }
+  
+  .paper-footer {
+    padding: 0.4rem 1rem 1rem;
+  }
+  
+  .polaroid-container {
+    width: 105px;
+    padding: 6px 6px 24px;
+  }
+
+  .polaroid-tape {
+    width: 50px;
+    height: 16px;
+    left: 28px;
+    top: -11px;
+  }
+  
+  .forever-us-container {
+    margin-left: 0.2rem;
+    margin-bottom: 0.4rem;
+  }
+}

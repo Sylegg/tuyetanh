@@ -1,0 +1,327 @@
+/* Love Diary (Scrapbook Stack) & Parallax Countdown Stylesheet */
+
+#story {
+  padding-bottom: 2rem !important;
+}
+
+#love-diary {
+  padding-top: 0rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
+/* ==========================================
+   INTERACTIVE POLAROID STACK (Nhật ký tình yêu)
+   ========================================== */
+.stack-explainer {
+  text-align: center;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--soft);
+  margin-top: -1.8rem;
+  margin-bottom: 2.2rem;
+  opacity: 0.95;
+}
+
+.polaroid-deck-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 560px;
+  position: relative;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.polaroid-deck {
+  position: relative;
+  width: 370px;
+  height: 480px;
+}
+
+.polaroid-deck-card {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(135deg, #fffefe, #fffdf9),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+  border: 1px solid rgba(224, 209, 186, 0.45);
+  border-radius: 3px;
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 12px 28px rgba(97, 18, 38, 0.08);
+  padding: 10px 10px 24px;
+  box-sizing: border-box;
+  filter: url(#torn-paper-filter);
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+.polaroid-deck-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 65px;
+  height: 18px;
+  background: rgba(246, 243, 235, 0.46);
+  backdrop-filter: blur(1.5px);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  z-index: 10;
+  filter: url(#tape-torn-filter);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.polaroid-deck-click-hint {
+  position: absolute;
+  bottom: 24%;
+  right: -20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #75192b, #59101f);
+  color: #ffffff;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 0.88rem;
+  font-style: italic;
+  font-weight: 600;
+  box-shadow: 
+    0 4px 12px rgba(117, 25, 43, 0.28),
+    0 1px 2px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  z-index: 50;
+  transform: rotate(4deg);
+  pointer-events: none;
+  animation: hintPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+  0%, 100% {
+    transform: rotate(4deg) translateY(0) scale(1);
+    box-shadow: 0 4px 12px rgba(117, 25, 43, 0.28);
+  }
+  50% {
+    transform: rotate(6deg) translateY(-4px) scale(1.04);
+    box-shadow: 0 8px 18px rgba(117, 25, 43, 0.38);
+  }
+}
+
+.polaroid-deck-photo-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #f7f7f7;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.polaroid-deck-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.polaroid-deck-quote {
+  text-align: center;
+  margin-top: auto;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  font-weight: 600;
+  color: #4a2b2f;
+  line-height: 1.38;
+  padding: 0.4rem 0.2rem 0;
+}
+
+
+/* ==========================================
+   COUNTDOWN PARALLAX BACKDROP (Khung Đếm Ngược)
+   ========================================== */
+.countdown-parallax-banner {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 4rem;
+  background: #191214;
+}
+
+.parallax-bg-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.parallax-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.42) contrast(1.02);
+}
+
+.parallax-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 250, 241, 0.1) 0%, rgba(25, 18, 20, 0.5) 100%);
+}
+
+.countdown-banner-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #ffffff;
+  padding: 2rem;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdown-subtitle {
+  font-family: "Playfair Display", serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #d8b36a;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+}
+
+.countdown-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.8rem, 5.2vw, 2.5rem);
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  margin: 0.5rem 0 1.8rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.countdown-clock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.clock-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  width: 70px;
+  height: 74px;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.clock-number {
+  font-family: "Playfair Display", serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #d8b36a;
+  line-height: 1.1;
+}
+
+.clock-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.72);
+  margin-top: 3px;
+}
+
+.clock-divider {
+  color: #d8b36a;
+  font-size: 1.8rem;
+  font-weight: 700;
+  height: 74px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 12px;
+}
+
+.countdown-wedding-date {
+  font-family: "Playfair Display", serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.28em;
+  color: rgba(255, 255, 255, 0.85);
+  border-top: 1px solid rgba(216, 179, 106, 0.35);
+  padding-top: 0.8rem;
+  width: 180px;
+}
+
+
+/* ==========================================
+   RESPONSIVE DESIGN (Thiết bị di động)
+   ========================================== */
+@media (max-width: 768px) {
+  .stack-explainer {
+    font-size: 1.05rem;
+    margin-top: -1.2rem;
+    margin-bottom: 1.8rem;
+    padding: 0 1rem;
+  }
+
+  .polaroid-deck-container {
+    height: 500px;
+  }
+
+  .polaroid-deck {
+    width: 325px;
+    height: 420px;
+  }
+
+  .polaroid-deck-card {
+    padding: 10px 10px 22px;
+  }
+
+  .polaroid-deck-quote {
+    font-size: 0.98rem;
+  }
+
+  .polaroid-deck-click-hint {
+    bottom: 25%;
+    right: -10px;
+    font-size: 0.82rem;
+    padding: 4px 10px;
+  }
+
+  .countdown-parallax-banner {
+    height: 380px;
+    margin-top: 3rem;
+  }
+
+  .clock-item {
+    width: 58px;
+    height: 62px;
+  }
+
+  .clock-number {
+    font-size: 1.45rem;
+  }
+
+  .clock-label {
+    font-size: 0.55rem;
+  }
+
+  .clock-divider {
+    font-size: 1.4rem;
+    height: 62px;
+    padding-bottom: 8px;
+  }
+  
+  .countdown-wedding-date {
+    font-size: 1.05rem;
+  }
+}

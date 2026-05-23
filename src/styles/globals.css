@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:wght@500;600;700&display=swap");
+@import "tailwindcss";
+@import "./base.css";
+@import "./hero.css";
+@import "./invitation.css";
+@import "./section-shell.css";
+@import "./calendar-countdown.css";
+@import "./couple.css";
+@import "./content-sections.css";
+@import "./love-letter.css";
+@import "./love-diary.css";
+@import "./animations.css";
+@import "./parallax-countdown.css";
+@import "./responsive.css";

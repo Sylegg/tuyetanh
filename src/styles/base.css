@@ -1,0 +1,67 @@
+﻿:root {
+  --ivory: #fffaf1;
+  --ivory-soft: #fff6e7;
+  --ivory-warm: #f7ead3;
+  --champagne-soft: #f3d99d;
+  --champagne: #d8b36a;
+  --burgundy: #75192b;
+  --royal-blue: #0b3559;
+  --ink: #20181a;
+  --soft: #7b6a66;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 18% 10%, #d8b36a33, transparent 32rem),
+    radial-gradient(circle at 80% 6%, #75192b24, transparent 26rem),
+    linear-gradient(135deg, #fffefa, var(--ivory)),
+    var(--ivory);
+  color: var(--ink);
+  font-family: "Cormorant Garamond", serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    repeating-linear-gradient(92deg, rgba(255, 255, 255, 0.16) 0 2px, transparent 2px 11px),
+    linear-gradient(120deg, rgba(255, 255, 255, 0.22), transparent 32%, rgba(216, 179, 106, 0.08));
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.font-script {
+  font-family: "Great Vibes", cursive;
+}
+
+.eyebrow {
+  font-family: "Playfair Display", serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+}

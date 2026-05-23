@@ -1,0 +1,224 @@
+﻿.invitation-opening {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: grid;
+  place-items: center;
+  width: 100vw;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255, 239, 191, 0.38), transparent 32rem),
+    radial-gradient(circle at 50% 102%, rgba(117, 25, 43, 0.24), transparent 34rem),
+    rgba(18, 10, 12, 0.48);
+  backdrop-filter: blur(12px);
+  perspective: 1800px;
+  overscroll-behavior: none;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+.invitation-card-base {
+  position: relative;
+  width: min(100vw, 44rem);
+  height: 100vh;
+  height: 100dvh;
+  border-radius: 0;
+  perspective: 1800px;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  box-shadow:
+    0 44px 120px rgba(18, 10, 12, 0.5),
+    0 0 0 1px rgba(216, 179, 106, 0.32),
+    0 0 70px rgba(255, 236, 184, 0.2);
+}
+
+.invitation-light-spill {
+  position: absolute;
+  inset: 0 18%;
+  z-index: 3;
+  transform-origin: center;
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 246, 216, 0.72) 45%, rgba(255, 255, 255, 0.92) 50%, rgba(255, 246, 216, 0.72) 55%, transparent),
+    radial-gradient(ellipse at 50% 50%, rgba(255, 246, 216, 0.7), transparent 62%);
+  filter: blur(10px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.invitation-card-inner,
+.invitation-door {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.invitation-card-inner {
+  z-index: 1;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 1.15rem;
+  padding: 3rem 1.5rem;
+  background:
+    radial-gradient(circle at 50% 14%, rgba(255, 255, 255, 0.92), transparent 13rem),
+    radial-gradient(circle at 50% 85%, rgba(216, 179, 106, 0.18), transparent 14rem),
+    linear-gradient(180deg, #fffaf0, #f9ebcf);
+  color: var(--royal-blue);
+  text-align: center;
+  opacity: 1;
+  transform: translateZ(-8px);
+}
+
+.invitation-card-inner::before {
+  content: "";
+  position: absolute;
+  inset: 1.25rem;
+  border: 1px solid rgba(216, 179, 106, 0.46);
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+.invitation-card-inner span {
+  font-family: "Playfair Display", serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+}
+
+.invitation-names {
+  display: grid;
+  justify-items: center;
+  gap: 0;
+  max-width: 24rem;
+  font-family: "Alex Brush", "Great Vibes", cursive;
+  font-size: clamp(4.6rem, 18vw, 8rem);
+  font-weight: 400;
+  line-height: 0.72;
+  color: var(--royal-blue);
+  text-shadow: 0 2px 0 rgba(255, 250, 241, 0.38);
+}
+
+.invitation-names span {
+  font: inherit;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.invitation-names em {
+  color: var(--champagne);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 0.48em;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 0.9;
+}
+
+.invitation-card-inner small {
+  margin-top: 1.25rem;
+  color: #5a1424;
+  font-family: "Playfair Display", serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.invitation-door {
+  z-index: 2;
+  width: 50%;
+  background:
+    radial-gradient(circle at 50% 25%, rgba(255, 255, 255, 0.86), transparent 16rem),
+    linear-gradient(135deg, #fff8e8 0%, #f4dcab 45%, #fff2d4 100%),
+    repeating-linear-gradient(90deg, rgba(216, 179, 106, 0.16) 0 1px, transparent 1px 12px);
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  will-change: transform;
+  display: grid;
+  place-items: center;
+  box-shadow:
+    inset 0 0 0 1px rgba(216, 179, 106, 0.38),
+    0 0 34px rgba(84, 39, 22, 0.16);
+}
+
+.invitation-door::after {
+  content: "";
+  position: absolute;
+  inset: 1.1rem 0.9rem;
+  border: 1px solid rgba(117, 25, 43, 0.18);
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 0 0.55rem rgba(255, 250, 241, 0.14),
+    inset 0 0 42px rgba(92, 52, 24, 0.08);
+}
+
+.invitation-door-handle {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 0.78rem;
+  height: 0.78rem;
+  border: 1px solid rgba(90, 20, 36, 0.22);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 36% 32%, rgba(255, 255, 255, 0.9), transparent 28%),
+    linear-gradient(135deg, #fff5d8, #d8b36a);
+  box-shadow:
+    0 0 0 0.32rem rgba(216, 179, 106, 0.14),
+    0 0.35rem 1rem rgba(72, 38, 20, 0.22);
+  transform: translateY(-50%) translateZ(24px);
+}
+
+.invitation-door-mark {
+  position: relative;
+  z-index: 1;
+  color: rgba(90, 20, 36, 0.34);
+  font-family: "Alex Brush", "Great Vibes", cursive;
+  font-size: clamp(5rem, 22vw, 9rem);
+  line-height: 1;
+  text-shadow: 0 2px 0 rgba(255, 250, 241, 0.34);
+}
+
+.invitation-door::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.32), transparent 30%, rgba(104, 62, 28, 0.12)),
+    radial-gradient(circle at 50% 76%, rgba(216, 179, 106, 0.16), transparent 14rem);
+  pointer-events: none;
+}
+
+.invitation-door-left {
+  left: 0;
+  right: auto;
+  border-radius: 0;
+  transform-origin: left center;
+  box-shadow:
+    inset -34px 0 58px rgba(72, 38, 20, 0.28),
+    28px 0 58px rgba(48, 24, 14, 0.24),
+    inset 0 0 0 1px rgba(216, 179, 106, 0.38);
+}
+
+.invitation-door-left .invitation-door-handle {
+  right: 1.35rem;
+}
+
+.invitation-door-right {
+  left: 50%;
+  right: auto;
+  border-radius: 0;
+  transform-origin: right center;
+  box-shadow:
+    inset 34px 0 58px rgba(72, 38, 20, 0.28),
+    -28px 0 58px rgba(48, 24, 14, 0.24),
+    inset 0 0 0 1px rgba(216, 179, 106, 0.38);
+}
+
+.invitation-door-right .invitation-door-handle {
+  left: 1.35rem;
+}
