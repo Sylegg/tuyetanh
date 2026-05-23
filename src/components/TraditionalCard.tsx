@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { wedding } from "@/data/wedding";
 import chuHyImg from "@/assets/CHU HY.webp";
@@ -9,6 +10,7 @@ import phuongLeftImg from "@/assets/Phuong 2.webp";
 import phuongRightImg from "@/assets/Phuong.webp";
 
 export function TraditionalCard() {
+  const cardRef = useRef<HTMLDivElement>(null);
   const brideName = wedding.bride;
   const groomName = wedding.groom;
 
@@ -16,10 +18,19 @@ export function TraditionalCard() {
   const phuongRightRatio = phuongRightImg.width / phuongRightImg.height;
   const chuHyRatio = chuHyImg.width / chuHyImg.height;
   const hoaRatio = hoaImg.width / hoaImg.height;
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start 85%", "end 15%"],
+  });
+  const leftPhoenixY = useTransform(scrollYProgress, [0, 1], [70, -65]);
+  const rightPhoenixY = useTransform(scrollYProgress, [0, 1], [55, -75]);
+  const leftPhoenixRotate = useTransform(scrollYProgress, [0, 1], [-4, 4]);
+  const rightPhoenixRotate = useTransform(scrollYProgress, [0, 1], [5, -3]);
 
   return (
     <div className="traditional-card-wrapper">
       <motion.div 
+        ref={cardRef}
         className="traditional-card"
         initial={{ opacity: 0, y: 55, scale: 0.96 }}
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -52,9 +63,9 @@ export function TraditionalCard() {
           {/* Left Phoenix */}
           <motion.div
             className="traditional-card-phoenix-left"
-            style={{ aspectRatio: phuongLeftRatio }}
-            initial={{ opacity: 0, x: -45, y: 35 }}
-            whileInView={{ opacity: 1, x: 0, y: 0 }}
+            style={{ aspectRatio: phuongLeftRatio, y: leftPhoenixY, rotate: leftPhoenixRotate }}
+            initial={{ opacity: 0, x: -45 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 1.15, ease: [0.22, 1, 0.36, 1] }}
           >
@@ -90,9 +101,9 @@ export function TraditionalCard() {
           {/* Right Phoenix */}
           <motion.div
             className="traditional-card-phoenix-right"
-            style={{ aspectRatio: phuongRightRatio }}
-            initial={{ opacity: 0, x: 45, y: -35 }}
-            whileInView={{ opacity: 1, x: 0, y: 0 }}
+            style={{ aspectRatio: phuongRightRatio, y: rightPhoenixY, rotate: rightPhoenixRotate }}
+            initial={{ opacity: 0, x: 45 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.6, duration: 1.15, ease: [0.22, 1, 0.36, 1] }}
           >
