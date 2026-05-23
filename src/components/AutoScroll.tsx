@@ -5,7 +5,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export function AutoScroll() {
   const [active, setActive] = useState(false);
   const rafRef = useRef<number | null>(null);
-  const speedPx = 0.8; // pixels per frame (~48px/s at 60fps)
+  // Accumulate fractional pixels to avoid rounding to 0 on mobile
+  const posRef = useRef<number>(0);
+  const speedPx = 0.9; // pixels per frame (~54px/s at 60fps)
 
   const stopScroll = useCallback(() => {
     if (rafRef.current) {
@@ -16,13 +18,27 @@ export function AutoScroll() {
   }, []);
 
   const startScroll = useCallback(() => {
+    // Sync posRef with current scroll position before starting
+    posRef.current = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+
     const step = () => {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (window.scrollY >= maxScroll) {
+      const maxScroll =
+        document.documentElement.scrollHeight -
+        (window.innerHeight || document.documentElement.clientHeight);
+
+      if (posRef.current >= maxScroll) {
         stopScroll();
         return;
       }
-      window.scrollBy(0, speedPx);
+
+      // Accumulate fractional pixels then assign integer
+      posRef.current = Math.min(posRef.current + speedPx, maxScroll);
+      const top = Math.round(posRef.current);
+
+      // Set scrollTop directly — works on iOS Safari where scrollBy may fail
+      document.documentElement.scrollTop = top;
+      document.body.scrollTop = top; // fallback for older browsers
+
       rafRef.current = requestAnimationFrame(step);
     };
     rafRef.current = requestAnimationFrame(step);
