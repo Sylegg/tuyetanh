@@ -139,12 +139,18 @@
     padding: 1rem 0.2rem;
   }
   
+  /* Disable heavy SVG filters on mobile for performance */
   .album-card {
+    filter: drop-shadow(0 8px 24px rgba(97, 18, 38, 0.08));
     padding: 10px 10px 26px;
     width: 96%;
   }
 
   .album-card-tape {
+    filter: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(246, 243, 235, 0.65);
     width: 65px;
     height: 18px;
     top: -12px;

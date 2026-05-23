@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CalendarPlus, MapPinned } from "lucide-react";
+import { CalendarPlus } from "lucide-react";
 import { wedding } from "@/data/wedding";
 import { createGoogleCalendarUrl } from "@/utils/calendar";
 
@@ -10,6 +10,14 @@ type EventType = "vu-quy" | "thanh-hon";
 
 export function EventInfo() {
   const [activeTab, setActiveTab] = useState<EventType>("vu-quy");
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   // Event 1: Lễ Vu Quy (Nhà Gái)
   const vuQuyCalendar = createGoogleCalendarUrl({
@@ -41,7 +49,6 @@ export function EventInfo() {
       venue: "ROYAL CENTER",
       address: "180/4 Song Hành, Xã Bà Điểm, TPHCM",
       mapQueryUrl: "https://maps.google.com/?q=180%2F4%20Song%20Hanh%20Trung%20Chanh%20Ba%20Diem%20TP%20Ho%20Chi%20Minh",
-      mapEmbedSrc: "https://www.google.com/maps?q=180%2F4+Song+Hanh+Trung+Chanh+Ba+Diem+TP+Ho+Chi+Minh&output=embed",
       calendarUrl: vuQuyCalendar,
     },
     "thanh-hon": {
@@ -55,7 +62,6 @@ export function EventInfo() {
       venue: "TƯ GIA (NHÀ TRAI)",
       address: "Tổ 2, Khu Phố 1, Phường Tân Thành, TP. HCM",
       mapQueryUrl: "https://www.google.com/maps?q=T%E1%BB%95+2,+Khu+Ph%E1%BB%91+1,+Ph%C6%B0%E1%BB%9Dng+T%C3%A2n+Th%C3%A0nh,+Th%E1%BB%8B+x%C3%A3+Ph%C3%BA+M%E1%BB%B9,+B%C3%A0+R%E1%BB%8Baa+-+V%C5%A9ng+T%C3%A0u",
-      mapEmbedSrc: "https://www.google.com/maps?q=T%E1%BB%95+2,+Khu+Ph%E1%BB%91+1,+Ph%C6%B0%E1%BB%9Dng+T%C3%A2n+Th%C3%A0nh,+Th%E1%BB%8B+x%C3%A3+Ph%C3%BA+M%E1%BB%B9,+B%C3%A0+R%E1%BB%8Baa+-+V%C5%A9ng+T%C3%A0u&output=embed",
       calendarUrl: thanhHonCalendar,
     },
   };
@@ -80,8 +86,8 @@ export function EventInfo() {
       {/* Subtle Cinematic Background Radial Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.7)_0%,transparent_70%)] pointer-events-none opacity-60" />
 
-      {/* Floating Slow-Motion Petals */}
-      {particles.map((pos, i) => (
+      {/* Floating Slow-Motion Petals — desktop only to avoid mobile lag */}
+      {!isMobile && particles.map((pos, i) => (
         <motion.div
           key={i}
           className="absolute w-1.5 h-1.5 rounded-full bg-[#d8b67c] opacity-20 pointer-events-none"
@@ -242,8 +248,7 @@ export function EventInfo() {
                 rel="noreferrer"
                 className="flex items-center gap-2 px-5 py-2 border border-[#c7a77b] text-[10px] uppercase tracking-[0.15em] font-[Cormorant_Garamond] text-[#3a2c2a] hover:bg-[#7b1f2f] hover:text-white hover:border-[#7b1f2f] transition-all duration-300 bg-transparent"
               >
-                <MapPinned size={12} className="text-[#c7a77b]" />
-                Bản đồ
+                Xem bản đồ
               </a>
               <a
                 href={currentEvent.calendarUrl}
@@ -254,17 +259,6 @@ export function EventInfo() {
                 <CalendarPlus size={12} className="text-[#c7a77b]" />
                 Thêm lịch
               </a>
-            </div>
-
-            {/* Golden Framed Compact Map Embed */}
-            <div className="w-full mt-1 p-1 bg-white border border-[#d8b67c]/35 shadow-[0_2px_8px_rgba(0,0,0,0.03)] z-10">
-              <iframe
-                title="Bản đồ địa điểm tiệc cưới"
-                src={currentEvent.mapEmbedSrc}
-                className="w-full h-[135px] border-none shadow-[inset_0_0_8px_rgba(0,0,0,0.03)]"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
             </div>
           </motion.div>
         </AnimatePresence>

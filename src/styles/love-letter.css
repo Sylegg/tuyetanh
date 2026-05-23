@@ -451,6 +451,23 @@
     padding: 4.5rem 0.8rem;
   }
   
+  /* Disable heavy SVG filters on mobile for performance */
+  .deckled-paper {
+    filter: drop-shadow(0 8px 20px rgba(97, 18, 38, 0.07));
+  }
+  
+  /* Disable petal animation on mobile */
+  .petal {
+    display: none;
+  }
+  
+  /* Disable tape backdrop-filter on mobile */
+  .polaroid-tape {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    filter: none;
+  }
+
   .love-letter-desk {
     aspect-ratio: 1 / 1.5;
   }
@@ -537,13 +554,6 @@
   .polaroid-container {
     width: 105px;
     padding: 6px 6px 24px;
-  }
-
-  .polaroid-tape {
-    width: 50px;
-    height: 16px;
-    left: 28px;
-    top: -11px;
   }
   
   .forever-us-container {

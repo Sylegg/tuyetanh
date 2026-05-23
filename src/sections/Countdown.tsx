@@ -39,8 +39,8 @@ export function CountdownSection() {
               <span className="calendar-day is-empty" key={day} />
             ))}
             {calendarDays.map((day) => (
-              <span className={`calendar-day ${day === 2 ? "is-wedding-day" : ""}`} key={day}>
-                {day === 2 && (
+              <span className={`calendar-day ${day === 2 || day === 5 ? "is-wedding-day" : ""}`} key={day}>
+                {(day === 2 || day === 5) && (
                   <Image
                     src={heartCalendar}
                     alt=""
