@@ -30,6 +30,22 @@
   pointer-events: none;
 }
 
+#couple::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 0;
+  height: clamp(7rem, 18vh, 12rem);
+  background: linear-gradient(180deg, #FAF6EE 0%, rgba(250, 246, 238, 0.72) 44%, rgba(250, 246, 238, 0) 100%);
+  pointer-events: none;
+}
+
+#couple > .section-heading,
+#couple > .editorial-couple-layout {
+  position: relative;
+  z-index: 1;
+}
+
 .editorial-couple-layout::before,
 .editorial-couple-layout::after {
   content: "";
