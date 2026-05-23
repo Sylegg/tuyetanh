@@ -158,7 +158,6 @@
   /* ── Contain repaint to each section so animations don't cascade ── */
   .section-shell,
   .love-letter-section,
-  #event,
   #couple,
   #countdown,
   #story,

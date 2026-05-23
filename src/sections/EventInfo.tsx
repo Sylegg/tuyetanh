@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { CalendarPlus } from "lucide-react";
-import { wedding } from "@/data/wedding";
 import { createGoogleCalendarUrl } from "@/utils/calendar";
 import { submitWish } from "@/utils/firebase";
 
@@ -26,6 +26,24 @@ export function EventInfo() {
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
+
+  React.useEffect(() => {
+    if (!isRsvpOpen) return;
+
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    const previousBodyOverscroll = document.body.style.overscrollBehavior;
+
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overscrollBehavior = "contain";
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      document.body.style.overscrollBehavior = previousBodyOverscroll;
+    };
+  }, [isRsvpOpen]);
 
   // Event 1: Lễ Vu Quy (Nhà Gái)
   const vuQuyCalendar = createGoogleCalendarUrl({
@@ -366,10 +384,11 @@ export function EventInfo() {
       </div>
 
       {/* RSVP Modal */}
-      <AnimatePresence>
+      {typeof document !== "undefined" && createPortal(
+        <AnimatePresence>
         {isRsvpOpen && (
           <motion.div
-            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/75"
+            className="fixed inset-0 z-[100000] flex items-start justify-center overflow-y-auto overscroll-contain bg-black/75 px-3 py-4 sm:items-center sm:p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -379,7 +398,8 @@ export function EventInfo() {
             {/* Modal Card */}
             <motion.div
               onClick={(e) => e.stopPropagation()}
-              className="relative z-50 w-full max-w-[420px] bg-white border border-[#d8b67c]/30 shadow-[0_20px_50px_rgba(97,18,38,0.22)] p-7 md:p-9 flex flex-col gap-6 text-left pointer-events-auto select-auto"
+              onPointerDown={(e) => e.stopPropagation()}
+              className="relative z-50 my-auto flex max-h-[calc(100dvh-2rem)] w-full max-w-[420px] flex-col gap-5 overflow-y-auto border border-[#d8b67c]/30 bg-white p-6 text-left shadow-[0_20px_50px_rgba(97,18,38,0.22)] pointer-events-auto select-auto [-webkit-overflow-scrolling:touch] md:gap-6 md:p-9"
               initial={{ opacity: 0, scale: 0.94, y: 15 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ opacity: 0, scale: 0.94, y: 15 }}
@@ -391,6 +411,7 @@ export function EventInfo() {
 
               {/* Close Button */}
               <button
+                type="button"
                 onClick={() => setIsRsvpOpen(false)}
                 className="absolute top-4 right-4 text-[#705e5c] hover:text-[#7b1f2f] text-2xl font-[Cormorant_Garamond] font-bold z-50 bg-transparent border-0 outline-none"
               >
@@ -438,7 +459,7 @@ export function EventInfo() {
                       placeholder="Nhập họ và tên..."
                       value={rsvpName}
                       onChange={(e) => setRsvpName(e.target.value)}
-                      className="w-full border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2.5 text-base md:text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors"
+                      className="w-full touch-auto border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2.5 text-base md:text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors"
                     />
                   </div>
 
@@ -450,7 +471,7 @@ export function EventInfo() {
                     <select
                       value={rsvpGuests}
                       onChange={(e) => setRsvpGuests(e.target.value)}
-                      className="w-full border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2.5 text-base md:text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors appearance-none cursor-pointer"
+                      className="w-full touch-auto border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2.5 text-base md:text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors appearance-none cursor-pointer"
                     >
                       <option value="1">1 người</option>
                       <option value="2">2 người</option>
@@ -481,7 +502,7 @@ export function EventInfo() {
                           max="20"
                           value={rsvpCustomGuests}
                           onChange={(e) => setRsvpCustomGuests(e.target.value)}
-                          className="w-full border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2 text-base md:text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors"
+                          className="w-full touch-auto border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2 text-base md:text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors"
                         />
                       </div>
                     </motion.div>
@@ -497,7 +518,7 @@ export function EventInfo() {
                       rows={3}
                       value={rsvpMessage}
                       onChange={(e) => setRsvpMessage(e.target.value)}
-                      className="w-full border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2.5 text-base md:text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors resize-none"
+                      className="w-full touch-auto border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2.5 text-base md:text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors resize-none"
                     />
                   </div>
 
@@ -517,7 +538,9 @@ export function EventInfo() {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }
