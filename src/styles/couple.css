@@ -91,8 +91,6 @@
   pointer-events: none;
   user-select: none;
   will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
 .editorial-person-card.is-bride {
@@ -240,6 +238,7 @@
 }
 
 @keyframes editorialFloat {
+
   0%,
   100% {
     opacity: 0.42;
@@ -253,6 +252,7 @@
 }
 
 @keyframes editorialSpark {
+
   0%,
   100% {
     opacity: 0.36;

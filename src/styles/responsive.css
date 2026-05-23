@@ -186,9 +186,10 @@
     transform: none !important;
   }
 
-  /* ── Hide decorative petals/sparks on mobile to save GPU ── */
+  /* ── Hide decorative petals/sparks/ellipses on mobile to save GPU and keep layout clean ── */
   .editorial-petal,
-  .editorial-spark {
-    display: none;
+  .editorial-spark,
+  #couple::after {
+    display: none !important;
   }
 }
