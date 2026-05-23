@@ -380,6 +380,7 @@ export function EventInfo() {
 
             {/* Modal Card */}
             <motion.div
+              onClick={(e) => e.stopPropagation()}
               className="relative z-50 w-full max-w-[420px] bg-white border border-[#d8b67c]/30 shadow-[0_20px_50px_rgba(97,18,38,0.22)] p-7 md:p-9 flex flex-col gap-6 text-left"
               initial={{ opacity: 0, scale: 0.94, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
