@@ -5,12 +5,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CalendarPlus } from "lucide-react";
 import { wedding } from "@/data/wedding";
 import { createGoogleCalendarUrl } from "@/utils/calendar";
+import { submitWish } from "@/utils/firebase";
 
 type EventType = "vu-quy" | "thanh-hon";
 
 export function EventInfo() {
   const [activeTab, setActiveTab] = useState<EventType>("vu-quy");
   const [isMobile, setIsMobile] = useState(false);
+  const [isRsvpOpen, setIsRsvpOpen] = useState(false);
+  const [rsvpName, setRsvpName] = useState("");
+  const [rsvpGuests, setRsvpGuests] = useState("1");
+  const [rsvpMessage, setRsvpMessage] = useState("");
+  const [rsvpCustomGuests, setRsvpCustomGuests] = useState("6");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   React.useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -67,6 +75,57 @@ export function EventInfo() {
   };
 
   const currentEvent = eventData[activeTab];
+
+  const handleRsvpSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!rsvpName.trim()) return;
+    setIsSubmitting(true);
+    try {
+      const isCustomMode = rsvpGuests === "more";
+      const totalGuestsCount = isCustomMode ? (Number(rsvpCustomGuests) || 6) : Number(rsvpGuests);
+      const finalMessage = rsvpMessage.trim() || `Chúc mừng ngày vui trọng đại của hai bạn! Trăm năm hạnh phúc!`;
+
+      // 1. Submit to guestbook/wishes (Firebase/LocalStorage)
+      await submitWish({
+        name: rsvpName,
+        message: finalMessage,
+        attendance: activeTab === "vu-quy" ? "Lễ Vu Quy (Nhà Gái)" : "Lễ Thành Hôn (Nhà Trai)",
+        guests: totalGuestsCount,
+      });
+
+      // 2. Direct POST to Google Sheets Web App (Serverless backend-free connection)
+      try {
+        await fetch("https://script.google.com/macros/s/AKfycbzCNTJA1_T8Nlgh_s_gx1ErbQtAC1m5O6nT7545r0CjFUaBk6xz1VmPNa_DBoLXhs2R/exec", {
+          method: "POST",
+          mode: "no-cors",
+          body: JSON.stringify({
+            name: rsvpName,
+            guests: totalGuestsCount,
+            companions: "",
+            attend: activeTab === "vu-quy" ? "Lễ Vu Quy" : "Lễ Thành Hôn",
+            message: rsvpMessage.trim(),
+            side: activeTab === "vu-quy" ? "Nhà Gái" : "Nhà Trai",
+          }),
+        });
+      } catch (sheetsErr) {
+        console.error("Failed sending RSVP to Google Sheets:", sheetsErr);
+      }
+
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setIsRsvpOpen(false);
+        setRsvpName("");
+        setRsvpMessage("");
+        setRsvpGuests("1");
+        setRsvpCustomGuests("6");
+      }, 3500);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   // Fixed positions — avoid Math.random() in render to prevent SSR hydration mismatch
   const particles = [
@@ -260,9 +319,180 @@ export function EventInfo() {
                 Lịch
               </a>
             </div>
+
+            {/* Primary RSVP Button */}
+            <motion.button
+              onClick={() => setIsRsvpOpen(true)}
+              className="relative z-10 w-full max-w-[280px] mx-auto py-3.5 mt-4 bg-[#7b1f2f] text-xs uppercase tracking-[0.2em] font-[Cormorant_Garamond] font-bold text-white rounded-full transition-all duration-300 shadow-[0_8px_30px_rgba(123,31,47,0.18)] hover:bg-[#fffaf1] hover:text-[#7b1f2f] hover:border-[#7b1f2f] border-2 border-[#7b1f2f] overflow-hidden group flex items-center justify-center gap-1.5"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              {/* Gold dashed inner border matching user's request styled elegantly */}
+              <span className="absolute inset-1.5 border-2 border-dashed border-[#d8b67c] rounded-full pointer-events-none" />
+              
+              {/* Shimmer light */}
+              <span className="absolute inset-y-0 -left-[100%] w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 group-hover:animate-shimmer" />
+
+              <span className="relative z-10 flex items-center gap-1.5 font-bold">
+                Xác nhận dự tiệc
+              </span>
+            </motion.button>
           </motion.div>
         </AnimatePresence>
       </div>
+
+      {/* RSVP Modal */}
+      <AnimatePresence>
+        {isRsvpOpen && (
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div
+              className="absolute inset-0 bg-[#0e0608]/75 backdrop-blur-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsRsvpOpen(false)}
+            />
+
+            {/* Modal Card */}
+            <motion.div
+              className="relative w-full max-w-[420px] bg-white border border-[#d8b67c]/30 shadow-[0_20px_50px_rgba(97,18,38,0.22)] p-7 md:p-9 flex flex-col gap-6 text-left"
+              initial={{ opacity: 0, scale: 0.94, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.94, y: 15 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {/* Thin Gold Double Border */}
+              <div className="absolute inset-2 border border-[#e5d3b3]/60 opacity-60 pointer-events-none" />
+              <div className="absolute inset-2.5 border border-[#d8b67c]/40 pointer-events-none" />
+
+              {/* Close Button */}
+              <button
+                onClick={() => setIsRsvpOpen(false)}
+                className="absolute top-4 right-4 text-[#705e5c] hover:text-[#7b1f2f] text-2xl font-[Cormorant_Garamond] font-bold z-50 bg-transparent border-0 outline-none"
+              >
+                ✕
+              </button>
+
+              {isSubmitted ? (
+                <motion.div
+                  className="flex flex-col items-center justify-center text-center py-8 gap-4 z-10"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
+                  <span className="text-4xl text-[#7b1f2f] animate-pulse">❤</span>
+                  <h3 className="font-[Cormorant_Garamond] text-xl md:text-2xl text-[#3a2c2a] font-bold tracking-wide">
+                    Xác nhận thành công!
+                  </h3>
+                  <p className="font-[Cormorant_Garamond] text-sm text-[#705e5c] max-w-[280px]">
+                    Cảm ơn bạn rất nhiều vì đã gửi xác nhận tham dự {activeTab === "vu-quy" ? "Lễ Vu Quy" : "Lễ Thành Hôn"}!
+                  </p>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleRsvpSubmit} className="flex flex-col gap-4 z-10 w-full">
+                  <div className="text-center flex flex-col gap-0.5">
+                    <span className="text-[9px] uppercase tracking-[0.25em] font-[Cormorant_Garamond] text-[#d8b67c] font-bold">
+                      RSVP / CONFIRMATION
+                    </span>
+                    <h3 className="font-[Cormorant_Garamond] text-xl md:text-2xl text-[#7b1f2f] font-bold tracking-wide">
+                      Xác Nhận Dự Tiệc
+                    </h3>
+                    <span className="text-[11px] font-[Cormorant_Garamond] text-[#705e5c] font-medium tracking-wide">
+                      {activeTab === "vu-quy" ? "Lễ Vu Quy (Nhà Gái)" : "Lễ Thành Hôn (Nhà Trai)"}
+                    </span>
+                  </div>
+
+                  <div className="w-12 h-px bg-[#d8b67c]/40 mx-auto my-1" />
+
+                  {/* Name field */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="font-[Cormorant_Garamond] text-[13px] uppercase tracking-[0.12em] text-[#3a2c2a] font-bold">
+                      Họ và tên của bạn
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Nhập họ và tên..."
+                      value={rsvpName}
+                      onChange={(e) => setRsvpName(e.target.value)}
+                      className="w-full border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2.5 text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors"
+                    />
+                  </div>
+
+                  {/* Guests field */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="font-[Cormorant_Garamond] text-[13px] uppercase tracking-[0.12em] text-[#3a2c2a] font-bold">
+                      Số người tham dự
+                    </label>
+                    <select
+                      value={rsvpGuests}
+                      onChange={(e) => setRsvpGuests(e.target.value)}
+                      className="w-full border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2.5 text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors appearance-none cursor-pointer"
+                    >
+                      <option value="1">1 người</option>
+                      <option value="2">2 người</option>
+                      <option value="3">3 người</option>
+                      <option value="4">4 người</option>
+                      <option value="5">5 người (Cả gia đình)</option>
+                      <option value="more">Nhiều hơn 5 người</option>
+                    </select>
+                  </div>
+
+                  {/* If custom more than 5 guests mode */}
+                  {rsvpGuests === "more" && (
+                    <motion.div
+                      className="flex flex-col gap-3.5 border-l-2 border-[#d8b67c]/40 pl-3"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {/* Number of guests input */}
+                      <div className="flex flex-col gap-1.5">
+                        <label className="font-[Cormorant_Garamond] text-[12px] uppercase tracking-[0.1em] text-[#705e5c] font-bold">
+                          Nhập số người tham dự cụ thể
+                        </label>
+                        <input
+                          type="number"
+                          required
+                          min="6"
+                          max="20"
+                          value={rsvpCustomGuests}
+                          onChange={(e) => setRsvpCustomGuests(e.target.value)}
+                          className="w-full border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2 text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors"
+                        />
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* Message field */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="font-[Cormorant_Garamond] text-[13px] uppercase tracking-[0.12em] text-[#3a2c2a] font-bold">
+                      Lời chúc của bạn (Tùy chọn)
+                    </label>
+                    <textarea
+                      placeholder="Gửi lời chúc tốt đẹp nhất tới cô dâu & chú rể..."
+                      rows={3}
+                      value={rsvpMessage}
+                      onChange={(e) => setRsvpMessage(e.target.value)}
+                      className="w-full border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2.5 text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors resize-none"
+                    />
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-3 mt-2 bg-[#7b1f2f] hover:bg-[#fffaf1] hover:text-[#7b1f2f] border border-[#7b1f2f] text-xs uppercase tracking-[0.2em] font-[Cormorant_Garamond] font-bold text-white transition-all duration-300 relative overflow-hidden flex items-center justify-center gap-1.5"
+                  >
+                    <span className="absolute inset-0.5 border border-[#d8b67c]/40 pointer-events-none" />
+                    {isSubmitting ? "Đang gửi..." : "Gửi Xác Nhận"}
+                  </button>
+                </form>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
