@@ -93,6 +93,8 @@ export function EventInfo() {
   };
 
   const currentEvent = eventData[activeTab];
+  const [monthLabel, monthNumber] = currentEvent.month.split(" ");
+  const [yearLabel, yearNumber] = currentEvent.year.split(" ");
 
   const handleRsvpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -266,30 +268,32 @@ export function EventInfo() {
             </div>
 
             {/* Compact Spaced Date Grid (THÁNG | DAY | NĂM) */}
-            <div className="grid grid-cols-3 items-center w-full max-w-[280px] mx-auto py-0.5 z-10 select-none">
+            <div className="grid grid-cols-[minmax(0,1fr)_124px_minmax(0,1fr)] md:grid-cols-[minmax(0,1fr)_144px_minmax(0,1fr)] items-center w-full max-w-[380px] mx-auto py-0.5 z-10 select-none">
               {/* Left Column */}
-              <div className="flex items-center justify-end pr-3 text-[#3a2c2a] border-r border-[#d8b67c]/25">
-                <span className="uppercase tracking-[0.14em] font-[Cormorant_Garamond] text-xs font-semibold">
-                  {currentEvent.month}
+              <div className="relative z-20 flex items-center justify-end pr-4 text-[#3a2c2a] border-r border-[#d8b67c]/25">
+                <span className="flex items-baseline gap-1.5 whitespace-nowrap uppercase tracking-[0.14em] font-[Cormorant_Garamond] text-xs md:text-sm font-bold">
+                  <span>{monthLabel}</span>
+                  <span className="text-lg md:text-xl tracking-[0.08em] text-[#3a2c2a]">{monthNumber}</span>
                 </span>
               </div>
 
               {/* Center Column: Monogram & Large Number */}
               <div className="relative flex items-center justify-center">
                 {/* Monogram backdrop - Changed to A&H */}
-                <div className="absolute font-[Playfair_Display] text-[62px] md:text-[70px] font-bold text-[#f2e6d6] tracking-normal select-none pointer-events-none scale-y-110 opacity-80">
+                <div className="absolute z-0 font-[Playfair_Display] text-[76px] md:text-[90px] font-bold text-[#f2e6d6] tracking-normal select-none pointer-events-none scale-y-110 opacity-50">
                   A&H
                 </div>
                 {/* Visual Focus: Large Burgundy Day Number */}
-                <h1 className="text-[56px] md:text-[64px] leading-none font-[Bodoni_Moda] text-[#7b1f2f] relative z-10 font-normal select-none">
+                <h1 className="text-[92px] md:text-[108px] leading-none font-[Bodoni_Moda] text-[#7b1f2f] relative z-10 font-normal select-none">
                   {currentEvent.day}
                 </h1>
               </div>
 
               {/* Right Column */}
-              <div className="flex items-center justify-start pl-3 text-[#3a2c2a] border-l border-[#d8b67c]/25">
-                <span className="uppercase tracking-[0.14em] font-[Cormorant_Garamond] text-xs font-semibold">
-                  {currentEvent.year}
+              <div className="relative z-20 flex items-center justify-start pl-4 text-[#3a2c2a] border-l border-[#d8b67c]/25">
+                <span className="flex items-baseline gap-1.5 whitespace-nowrap uppercase tracking-[0.14em] font-[Cormorant_Garamond] text-xs md:text-sm font-bold">
+                  <span>{yearLabel}</span>
+                  <span className="text-lg md:text-xl tracking-[0.08em] text-[#3a2c2a]">{yearNumber}</span>
                 </span>
               </div>
             </div>
