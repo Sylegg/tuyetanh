@@ -220,7 +220,7 @@ export function EventInfo() {
             {/* Details & Day Time */}
             <div className="flex flex-col gap-1 z-10">
               <p className="uppercase tracking-[0.1em] font-[Cormorant_Garamond] text-sm text-[#3a2c2a] font-semibold">
-                VÀO LÚC <span className="text-[#7b1f2f] font-bold">{currentEvent.time}</span> {currentEvent.dayOfWeek}
+                VÀO LÚC <span className="text-[#7b1f2f] font-bold">{currentEvent.time}</span>
               </p>
               <p className="text-[10px] md:text-xs text-[#705e5c] italic tracking-wide">
                 ({currentEvent.lunar})

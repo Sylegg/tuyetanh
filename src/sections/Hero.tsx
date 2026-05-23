@@ -69,7 +69,7 @@ export function Hero({ onOpenInvitation }: HeroProps) {
         </div>
 
         <div className="hero-details">
-          <p className="hero-date">Thứ Năm, 02 tháng 07, 2026 - 17:00</p>
+          <p className="hero-date">02/05.07.2026</p>
           <div className="hero-actions">
             <LuxuryButton className="hero-open-button" onClick={openInvitation}>
               <span className="cta-arrows cta-arrows-left" aria-hidden="true">
