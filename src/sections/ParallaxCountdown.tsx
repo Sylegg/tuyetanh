@@ -127,7 +127,10 @@ export function ParallaxCountdown() {
               </span>
             </div>
 
-            <span className="text-[#ecd599] text-xl animate-pulse select-none mt-[-16px]">❤</span>
+            <span className="signature-heart" aria-hidden="true">
+              <span className="signature-heart-orbit" />
+              <span className="signature-heart-core" />
+            </span>
 
             {/* Chú rể */}
             <div className="flex flex-col items-center">
