@@ -22,7 +22,7 @@ export function Hero({ onOpenInvitation }: HeroProps) {
   }, []);
 
   const jumpToCouple = () => {
-    const target = document.getElementById("couple");
+    const target = document.getElementById("traditional-invitation");
     if (!target) return;
 
     const root = document.documentElement;

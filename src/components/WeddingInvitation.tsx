@@ -7,6 +7,7 @@ import { AutoScroll } from "@/components/AutoScroll";
 import { MusicPlayer } from "@/components/MusicPlayer";
 import { Particles } from "@/components/Particles";
 import { BrideGroom } from "@/sections/BrideGroom";
+import { TraditionalInvitation } from "@/sections/TraditionalInvitation";
 import { CountdownSection } from "@/sections/Countdown";
 import { EventInfo } from "@/sections/EventInfo";
 import { Hero } from "@/sections/Hero";
@@ -91,6 +92,7 @@ export default function WeddingInvitation() {
         <Hero onOpenInvitation={handleOpenInvitation} />
         {invitationOpened && (
           <>
+            <TraditionalInvitation />
             <BrideGroom />
             <CountdownSection />
             <LoveLetter />

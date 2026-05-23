@@ -13,27 +13,21 @@
 }
 
 #couple {
+  position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 16% 18%, rgba(216, 179, 106, 0.2), transparent 15rem),
-    radial-gradient(circle at 90% 76%, rgba(117, 25, 43, 0.13), transparent 16rem),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0 14%, transparent 14% 100%),
-    linear-gradient(180deg, #fffaf0 0%, #fff3df 48%, #fffaf0 100%);
+  background-color: #FAF6EE; /* Premium warm ivory cotton paper background */
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.45), transparent),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
 }
 
 #couple::before {
   content: "";
   position: absolute;
-  pointer-events: none;
-}
-
-#couple::before {
   inset: 0;
-  background:
-    repeating-linear-gradient(90deg, rgba(216, 179, 106, 0.045) 0 1px, transparent 1px 22px),
-    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0 2px, transparent 2px 18px),
-    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.72), transparent 21rem);
-  opacity: 0.68;
+  z-index: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(216, 179, 106, 0.12), transparent 30rem);
+  pointer-events: none;
 }
 
 .editorial-couple-layout::before,

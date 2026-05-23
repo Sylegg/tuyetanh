@@ -1,0 +1,252 @@
+.traditional-invitation-section {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FAF6EE; /* Premium warm ivory cotton paper background */
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.45), transparent),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+.traditional-card-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  perspective: 1000px;
+  background: transparent;
+}
+
+.traditional-card {
+  position: relative;
+  width: 100%;
+  max-width: 500px; /* Perfect vertical card ratio */
+  height: 100vh;
+  height: 100dvh;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5rem 0 0;
+  box-sizing: border-box;
+  user-select: none;
+  border-radius: 0;
+}
+
+/* Elegant Name Display */
+.traditional-card-names {
+  position: relative;
+  top: -3.2rem;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  align-items: flex-start;
+  gap: 0.6rem;
+  color: #75192b; /* Deep Burgundy matching mockup */
+  font-family: "Dancing Script", "Alex Brush", cursive;
+  font-size: 4.45rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 0.96;
+  text-align: left;
+  text-transform: none;
+  z-index: 10;
+  margin-top: 1.5rem;
+  margin-left: clamp(1.25rem, 7vw, 3.75rem);
+  padding: 0;
+  text-shadow: 0 2px 8px rgba(117, 25, 43, 0.12);
+}
+
+.traditional-card-names span {
+  display: block;
+}
+
+.traditional-card-names span:nth-child(2) {
+  padding-left: clamp(3.2rem, 13vw, 5.4rem);
+}
+
+/* Middle Layout - Banner, Chu Hy and Phoenixes */
+.traditional-card-middle {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4.4rem; /* Đẩy toàn bộ cụm phượng, banner, chữ hỷ thấp xuống phía giữa */
+}
+
+.traditional-card-banner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 110px; /* Thâm dải băng dày dặn, sang trọng */
+  background-color: #75192b; /* Rich burgundy banner */
+  z-index: 1;
+  box-shadow: 0 6px 20px rgba(117, 25, 43, 0.22);
+}
+
+.traditional-card-chuhy {
+  position: absolute;
+  z-index: 3;
+  height: 180px; /* Chữ Hỷ to lớn cực kỳ ấn tượng */
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 16px rgba(72, 10, 15, 0.32));
+}
+
+.traditional-card-phoenix-left {
+  position: absolute;
+  left: -85px; /* Sát chặt và chìm sâu hơn */
+  bottom: -180px;
+  height: 620px; /* Siêu khổng lồ hùng vĩ */
+  width: auto;
+  z-index: 2;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.traditional-card-phoenix-right {
+  position: absolute;
+  right: -50px; /* Sát chặt viền phải */
+  top: -240px; /* Đưa phượng hoàng phải bay cao hẳn lên trên */
+  height: 380px; /* Phượng hoàng cực to lớn và hùng vĩ */
+  width: auto;
+  z-index: 2;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Bottom Right Flower Illustration */
+.traditional-card-bottom {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  margin-top: auto;
+}
+
+.traditional-card-flower {
+  position: absolute;
+  right: -55px; /* Sát viền dưới bên phải */
+  bottom: 25px;
+  width: 340px; /* Họa tiết hoa to lớn, lộng lẫy */
+  height: auto;
+  object-fit: contain;
+  z-index: 1;
+  opacity: 0.98;
+  pointer-events: none;
+}
+
+/* Media Queries for perfect responsiveness on small screens */
+@media (max-width: 440px) {
+  .traditional-card-wrapper {
+    padding: 0;
+  }
+
+  .traditional-card {
+    height: 100vh;
+    height: 100dvh;
+    padding-top: 4.5rem;
+  }
+
+  .traditional-card-names {
+    font-size: 3.35rem;
+    gap: 0.45rem;
+    margin-left: 1.15rem;
+  }
+
+  .traditional-card-middle {
+    height: 230px;
+    margin-top: 4.25rem; /* Đẩy thấp xuống trên mobile */
+  }
+
+  .traditional-card-banner {
+    height: 86px;
+  }
+
+  .traditional-card-chuhy {
+    height: 140px;
+  }
+
+  .traditional-card-phoenix-left {
+    height: 470px;
+    left: -65px;
+    bottom: -130px;
+  }
+
+  .traditional-card-phoenix-right {
+    height: 310px;
+    right: -40px;
+    top: -180px; /* Bay cao hơn trên mobile */
+  }
+
+  .traditional-card-bottom {
+    height: 200px;
+  }
+
+  .traditional-card-flower {
+    width: 270px;
+    right: -45px;
+    bottom: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .traditional-card {
+    height: 100vh;
+    height: 100dvh;
+    padding-top: 4rem;
+  }
+
+  .traditional-card-names {
+    font-size: 2.9rem;
+    margin-left: 1rem;
+  }
+
+  .traditional-card-middle {
+    height: 200px;
+    margin-top: 3.65rem; /* Đẩy thấp xuống trên mobile nhỏ */
+  }
+
+  .traditional-card-banner {
+    height: 74px;
+  }
+
+  .traditional-card-chuhy {
+    height: 120px;
+  }
+
+  .traditional-card-phoenix-left {
+    height: 410px;
+    left: -60px;
+    bottom: -115px;
+  }
+
+  .traditional-card-phoenix-right {
+    height: 265px;
+    right: -35px;
+    top: -150px; /* Bay cao hơn trên mobile nhỏ */
+  }
+
+  .traditional-card-bottom {
+    height: 170px;
+  }
+
+  .traditional-card-flower {
+    width: 230px;
+    right: -40px;
+    bottom: 10px;
+  }
+}
