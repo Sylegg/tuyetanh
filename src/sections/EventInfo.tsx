@@ -248,7 +248,7 @@ export function EventInfo() {
                 rel="noreferrer"
                 className="flex items-center gap-2 px-5 py-2 border border-[#c7a77b] text-[10px] uppercase tracking-[0.15em] font-[Cormorant_Garamond] text-[#3a2c2a] hover:bg-[#7b1f2f] hover:text-white hover:border-[#7b1f2f] transition-all duration-300 bg-transparent"
               >
-                Xem bản đồ
+                Bản đồ
               </a>
               <a
                 href={currentEvent.calendarUrl}
@@ -257,7 +257,7 @@ export function EventInfo() {
                 className="flex items-center gap-2 px-5 py-2 border border-[#c7a77b] text-[10px] uppercase tracking-[0.15em] font-[Cormorant_Garamond] text-[#3a2c2a] hover:bg-[#7b1f2f] hover:text-white hover:border-[#7b1f2f] transition-all duration-300 bg-transparent"
               >
                 <CalendarPlus size={12} className="text-[#c7a77b]" />
-                Thêm lịch
+                Lịch
               </a>
             </div>
           </motion.div>
