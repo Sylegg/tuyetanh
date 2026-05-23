@@ -371,7 +371,7 @@ export function EventInfo() {
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
             {/* Backdrop */}
             <motion.div
-              className="absolute inset-0 bg-[#0e0608]/75 backdrop-blur-sm"
+              className="absolute inset-0 z-10 bg-[#0e0608]/75 backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -380,7 +380,7 @@ export function EventInfo() {
 
             {/* Modal Card */}
             <motion.div
-              className="relative w-full max-w-[420px] bg-white border border-[#d8b67c]/30 shadow-[0_20px_50px_rgba(97,18,38,0.22)] p-7 md:p-9 flex flex-col gap-6 text-left"
+              className="relative z-50 w-full max-w-[420px] bg-white border border-[#d8b67c]/30 shadow-[0_20px_50px_rgba(97,18,38,0.22)] p-7 md:p-9 flex flex-col gap-6 text-left"
               initial={{ opacity: 0, scale: 0.94, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.94, y: 15 }}
@@ -439,7 +439,7 @@ export function EventInfo() {
                       placeholder="Nhập họ và tên..."
                       value={rsvpName}
                       onChange={(e) => setRsvpName(e.target.value)}
-                      className="w-full border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2.5 text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors"
+                      className="w-full border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2.5 text-base md:text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors"
                     />
                   </div>
 
@@ -451,7 +451,7 @@ export function EventInfo() {
                     <select
                       value={rsvpGuests}
                       onChange={(e) => setRsvpGuests(e.target.value)}
-                      className="w-full border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2.5 text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors appearance-none cursor-pointer"
+                      className="w-full border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2.5 text-base md:text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors appearance-none cursor-pointer"
                     >
                       <option value="1">1 người</option>
                       <option value="2">2 người</option>
@@ -482,7 +482,7 @@ export function EventInfo() {
                           max="20"
                           value={rsvpCustomGuests}
                           onChange={(e) => setRsvpCustomGuests(e.target.value)}
-                          className="w-full border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2 text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors"
+                          className="w-full border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2 text-base md:text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors"
                         />
                       </div>
                     </motion.div>
@@ -498,7 +498,7 @@ export function EventInfo() {
                       rows={3}
                       value={rsvpMessage}
                       onChange={(e) => setRsvpMessage(e.target.value)}
-                      className="w-full border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2.5 text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors resize-none"
+                      className="w-full border border-[#c7a77b]/40 bg-[#fffaf1]/50 px-4 py-2.5 text-base md:text-sm text-[#3a2c2a] font-[Cormorant_Garamond] focus:border-[#7b1f2f] focus:outline-none transition-colors resize-none"
                     />
                   </div>
 
