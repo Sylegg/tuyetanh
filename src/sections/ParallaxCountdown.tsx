@@ -11,7 +11,7 @@ import logoWhite from "@/assets/logo.png"; // White monogram logo
 export function ParallaxCountdown() {
   const containerRef = useRef<HTMLElement>(null);
   const countdown = useCountdown(wedding.date);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true); // default true to skip on SSR
 
   useEffect(() => {
     const checkMobile = () => {
@@ -22,7 +22,7 @@ export function ParallaxCountdown() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Parallax Scroll logic for the entire grand finale
+  // Parallax Scroll logic — only on desktop
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],

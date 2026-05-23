@@ -1,11 +1,21 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { RemoteImage } from "@/components/RemoteImage";
 import { SectionShell } from "@/components/SectionShell";
 import { people } from "@/data/wedding";
 
 export function BrideGroom() {
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   return (
     <SectionShell id="couple" title="Cô dâu & Chú rể">
       <div className="editorial-couple-layout">
@@ -21,10 +31,10 @@ export function BrideGroom() {
             <motion.article
               className={`editorial-person-card ${isBride ? "is-bride" : "is-groom"}`}
               key={person.role}
-              initial={{ opacity: 0, y: 42, scale: 0.95, rotate: isBride ? -6 : 6 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1, rotate: isBride ? -4 : 4 }}
-              viewport={{ once: true, amount: 0.34 }}
-              transition={{ duration: 0.9, delay: index * 0.16, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, y: isMobile ? 24 : 42 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: isMobile ? 0.5 : 0.9, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="editorial-image">
                 <RemoteImage

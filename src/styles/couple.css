@@ -1,4 +1,4 @@
-﻿.portrait-grid,
+.portrait-grid,
 .family-grid {
   display: grid;
   gap: 1.2rem;
@@ -14,6 +14,7 @@
 
 #couple {
   overflow: hidden;
+  contain: layout style paint;
   background:
     radial-gradient(circle at 16% 18%, rgba(216, 179, 106, 0.2), transparent 15rem),
     radial-gradient(circle at 90% 76%, rgba(117, 25, 43, 0.13), transparent 16rem),
@@ -90,7 +91,6 @@
   isolation: isolate;
   pointer-events: none;
   user-select: none;
-  will-change: transform;
 }
 
 .editorial-person-card.is-bride {
