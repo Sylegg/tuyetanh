@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useCountdown } from "@/hooks/useCountdown";
@@ -11,6 +11,16 @@ import logoWhite from "@/assets/logo.png"; // White monogram logo
 export function ParallaxCountdown() {
   const containerRef = useRef<HTMLElement>(null);
   const countdown = useCountdown(wedding.date);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Parallax Scroll logic for the entire grand finale
   const { scrollYProgress } = useScroll({
@@ -35,7 +45,7 @@ export function ParallaxCountdown() {
       id="parallax-countdown"
     >
       {/* Parallax Background spanning both parts */}
-      <motion.div className="parallax-bg-wrapper" style={{ y }}>
+      <motion.div className="parallax-bg-wrapper" style={isMobile ? {} : { y }}>
         <Image
           src={bgPhoto}
           alt="Hình nền chung đôi"

@@ -1,33 +1,45 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useMemo } from "react";
-
-const particleCount = 32;
-const petalCount = 18;
+import { useMemo, useState, useEffect } from "react";
 
 export function Particles() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const particles = useMemo(
-    () =>
-      Array.from({ length: particleCount }, (_, index) => ({
+    () => {
+      const count = isMobile ? 8 : 32;
+      return Array.from({ length: count }, (_, index) => ({
         id: index,
         left: `${(index * 29) % 100}%`,
         size: 3 + (index % 5),
         delay: (index % 8) * 0.45,
         duration: 7 + (index % 6),
-      })),
-    [],
+      }));
+    },
+    [isMobile],
   );
 
   const petals = useMemo(
-    () =>
-      Array.from({ length: petalCount }, (_, index) => ({
+    () => {
+      const count = isMobile ? 6 : 18;
+      return Array.from({ length: count }, (_, index) => ({
         id: index,
         left: `${(index * 41) % 100}%`,
         delay: (index % 9) * 0.8,
         duration: 9 + (index % 7),
-      })),
-    [],
+      }));
+    },
+    [isMobile],
   );
 
   return (

@@ -1,4 +1,4 @@
-﻿@media (min-width: 720px) {
+@media (min-width: 720px) {
   .section-shell {
     padding: 7rem 2rem;
   }
@@ -72,3 +72,53 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+@media (max-width: 768px) {
+  /* High-Performance Mobile Optimizations: Disable heavy real-time WebKit backdrop blurring */
+  .portrait-card,
+  .family-card,
+  .event-card,
+  .rsvp-form,
+  .gift-card,
+  .story-paper,
+  .timeline-card,
+  .wish-bubble {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.94) !important;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .editorial-caption {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(18, 9, 11, 0.74) !important;
+  }
+
+  .parallax-time-box {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(20, 16, 16, 0.88) !important;
+  }
+
+  .music-player-btn,
+  .music-tooltip,
+  .autoscroll-bar,
+  .autoscroll-tooltip,
+  .parallax-silk-overlay,
+  .invitation-card-base,
+  .calendar-countdown-section {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Force hardware acceleration on animate elements */
+  [data-reveal],
+  .editorial-person-card,
+  .hero-open-button {
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
