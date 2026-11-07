@@ -1,0 +1,44 @@
+/* The outer page only scales the invitation; its layout stays 440 × 956. */
+html:has(.mobile-viewport-shell),
+body:has(.mobile-viewport-shell) {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+.mobile-viewport-shell {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at top, #f3d99d33, transparent 65%),
+    #fffaf1;
+}
+
+.mobile-viewport-frame {
+  position: relative;
+  overflow: hidden;
+  background: #fffaf1;
+  box-shadow: 0 8px 40px #75192b20;
+}
+
+.mobile-viewport-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border: 0;
+  transform-origin: top left;
+}
+
+.rsvp-viewport-overlay {
+  bottom: auto;
+  height: var(--invitation-visible-height, 100dvh);
+}
+
+.rsvp-viewport-card {
+  max-height: calc(var(--invitation-visible-height, 100dvh) - 2rem);
+}

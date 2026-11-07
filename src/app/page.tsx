@@ -1,5 +1,5 @@
-import WeddingInvitation from "@/components/WeddingInvitation";
+import { MobileInvitationViewport } from "@/components/MobileInvitationViewport";
 
 export default function Page() {
-  return <WeddingInvitation />;
+  return <MobileInvitationViewport />;
 }

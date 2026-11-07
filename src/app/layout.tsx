@@ -1,5 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  // Keep the layout stable when the on-screen keyboard reduces the visual viewport.
+  interactiveWidget: "resizes-visual",
+};
 
 export const metadata: Metadata = {
   title: "Thiệp cưới Tuyết Anh & Minh Hiếu",

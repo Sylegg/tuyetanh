@@ -392,7 +392,7 @@ export function EventInfo() {
         <AnimatePresence>
         {isRsvpOpen && (
           <motion.div
-            className="fixed inset-0 z-[100000] flex items-start justify-center overflow-y-auto overscroll-contain bg-black/75 px-3 py-4 sm:items-center sm:p-4"
+            className="rsvp-viewport-overlay fixed inset-0 z-[100000] flex items-start justify-center overflow-y-auto overscroll-contain bg-black/75 px-3 py-4 sm:items-center sm:p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -403,7 +403,7 @@ export function EventInfo() {
             <motion.div
               onClick={(e) => e.stopPropagation()}
               onPointerDown={(e) => e.stopPropagation()}
-              className="relative z-50 my-auto flex max-h-[calc(100dvh-2rem)] w-full max-w-[420px] flex-col gap-5 overflow-y-auto border border-[#d8b67c]/30 bg-white p-6 text-left shadow-[0_20px_50px_rgba(97,18,38,0.22)] pointer-events-auto select-auto [-webkit-overflow-scrolling:touch] md:gap-6 md:p-9"
+              className="rsvp-viewport-card relative z-50 my-auto flex max-h-[calc(100dvh-2rem)] w-full max-w-[420px] flex-col gap-5 overflow-y-auto border border-[#d8b67c]/30 bg-white p-6 text-left shadow-[0_20px_50px_rgba(97,18,38,0.22)] pointer-events-auto select-auto [-webkit-overflow-scrolling:touch] md:gap-6 md:p-9"
               initial={{ opacity: 0, scale: 0.94, y: 15 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ opacity: 0, scale: 0.94, y: 15 }}
